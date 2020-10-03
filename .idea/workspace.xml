@@ -23,13 +23,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb7878d6-6aab-4b6e-aaa9-29d20008cdb0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/MavenWrapperDownloader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/_742pm/docs/DemoApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/_742pm/docs/greeting/Greeting.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/_742pm/docs/greeting/GreetingController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/_742pm/docs/DemoApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarIssues.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarIssues.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +76,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="ignore.preview.features.used" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="project.structure.last.edited" value="Project" />
@@ -150,7 +151,7 @@
       <updated>1601700839739</updated>
       <workItem from="1601700840921" duration="2946000" />
       <workItem from="1601708854027" duration="834000" />
-      <workItem from="1601709811321" duration="688000" />
+      <workItem from="1601709811321" duration="1969000" />
     </task>
     <servers />
   </component>
@@ -186,22 +187,22 @@
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="400" y="276" width="479" height="256" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1280.800@0.0.1280.800" timestamp="1601702896311" />
-    <state width="1238" height="498" key="GridCell.Tab.0.bottom" timestamp="1601710727482">
+    <state width="1238" height="498" key="GridCell.Tab.0.bottom" timestamp="1601712258816">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="498" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1601710727482" />
-    <state width="1238" height="498" key="GridCell.Tab.0.center" timestamp="1601710727481">
+    <state width="1238" height="498" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1601712258816" />
+    <state width="1238" height="498" key="GridCell.Tab.0.center" timestamp="1601712258814">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="498" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1601710727481" />
-    <state width="1238" height="498" key="GridCell.Tab.0.left" timestamp="1601710727480">
+    <state width="1238" height="498" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1601712258814" />
+    <state width="1238" height="498" key="GridCell.Tab.0.left" timestamp="1601712258812">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="498" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1601710727479" />
-    <state width="1238" height="498" key="GridCell.Tab.0.right" timestamp="1601710727482">
+    <state width="1238" height="498" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1601712258812" />
+    <state width="1238" height="498" key="GridCell.Tab.0.right" timestamp="1601712258815">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="498" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1601710727482" />
+    <state width="1238" height="498" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1601712258815" />
     <state x="141" y="0" key="SettingsEditor" timestamp="1601703437912">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
