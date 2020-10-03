@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  _742pm-docs:
+    build: .
+    depends_on:
+      - db
+    environment:
+      SRV_VER: 2.0.0
+      SRV_NAME: docs
+      JVM_XMX: 512m
+      SERVICE_TELEGRAF: 0
+      DB_URL: jdbc:postgresql://db:5432/
+      DB_USER: debs
+      DB_PASS: pass
+    ports:
+      - "9000:8080"
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: debs
+      POSTGRES_PASSWORD: pass
+
