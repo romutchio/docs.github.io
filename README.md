@@ -5,4 +5,4 @@ Application for your personal documents (Scan and Original)
 
 
 # API
-Available at: [link](https://docs-io.herokuapp.com/)
+Available at: [link](https://docs-io.herokuapp.com/greeting)
