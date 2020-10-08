@@ -22,7 +22,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb7878d6-6aab-4b6e-aaa9-29d20008cdb0" name="Default Changelist" comment="add google oauth2" />
+    <list default="true" id="fb7878d6-6aab-4b6e-aaa9-29d20008cdb0" name="Default Changelist" comment="add google oauth2">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -126,13 +128,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -166,6 +170,7 @@
       <workItem from="1601708854027" duration="834000" />
       <workItem from="1601709811321" duration="1969000" />
       <workItem from="1601828837046" duration="1989000" />
+      <workItem from="1602180197832" duration="241000" />
     </task>
     <task id="LOCAL-00001" summary="add google oauth2">
       <created>1601831587681</created>
