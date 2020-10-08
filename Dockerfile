@@ -15,5 +15,6 @@ RUN mvn clean verify
 FROM openjdk:14-jdk-alpine
 COPY --from=backend /backend/target/backend-0.0.1-SNAPSHOT.jar ./app.jar
 EXPOSE 8080
-USER spring:spring
+RUN adduser -D user
+USER user
 CMD [ "sh", "-c", "java -Dserver.port=$PORT -Djava.security.egd=file:/dev/./urandom -jar app.jar" ]
