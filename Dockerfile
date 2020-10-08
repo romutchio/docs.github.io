@@ -1,3 +1,4 @@
+  
 FROM node as frontend
 WORKDIR /frontend
 COPY frontend .
@@ -9,11 +10,11 @@ WORKDIR /backend
 COPY backend .
 RUN mkdir -p src/main/resources/static
 COPY --from=frontend /frontend/build src/main/resources/static
+RUN mvn clean verify
 
-FROM openjdk:15-jdk-alpine
-RUN addgroup -S spring && adduser -S spring -G spring
+FROM openjdk:14-jdk-alpine
+COPY --from=backend /backend/target/backend-0.0.1-SNAPSHOT.jar ./app.jar
 EXPOSE 8080
-USER spring:spring
-ARG JAR_FILE=backend/target/*.jar
-COPY ${JAR_FILE} backend/app.jar
-ENTRYPOINT ["java","-jar","/backend/app.jar"]
+RUN adduser -D user
+USER user
+CMD [ "sh", "-c", "java -Dserver.port=$PORT -Djava.security.egd=file:/dev/./urandom -jar app.jar" ]
