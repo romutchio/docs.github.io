@@ -9,7 +9,6 @@ WORKDIR /backend
 COPY backend .
 RUN mkdir -p src/main/resources/static
 COPY --from=frontend /frontend/build src/main/resources/static
-RUN mvn clean verify
 
 FROM openjdk:15-jdk-alpine
 RUN addgroup -S spring && adduser -S spring -G spring
