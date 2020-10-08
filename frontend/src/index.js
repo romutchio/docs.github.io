@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import * as serviceWorker from './serviceWorker';
 
 import corgi from './images/BigCorgi.gif';
 
@@ -17,3 +18,5 @@ ReactDOM.render(
     </React.StrictMode>,
     document.getElementById('root')
 );
+
+serviceWorker.unregister();
