@@ -22,15 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb7878d6-6aab-4b6e-aaa9-29d20008cdb0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/_742pm/docs/greeting/Doc.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/_742pm/docs/greeting/DocsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/_742pm/docs/security/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/docs.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-    </list>
+    <list default="true" id="fb7878d6-6aab-4b6e-aaa9-29d20008cdb0" name="Default Changelist" comment="add google oauth2" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -173,8 +165,16 @@
       <workItem from="1601700840921" duration="2946000" />
       <workItem from="1601708854027" duration="834000" />
       <workItem from="1601709811321" duration="1969000" />
-      <workItem from="1601828837046" duration="1464000" />
+      <workItem from="1601828837046" duration="1989000" />
     </task>
+    <task id="LOCAL-00001" summary="add google oauth2">
+      <created>1601831587681</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1601831587681</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,6 +194,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="add google oauth2" />
+    <option name="LAST_COMMIT_MESSAGE" value="add google oauth2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="340" y="209" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601701484964">
@@ -232,6 +234,10 @@
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="141" y="0" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1601703437912" />
+    <state x="321" y="148" key="Vcs.Push.Dialog.v2" timestamp="1601831590886">
+      <screen x="0" y="23" width="1440" height="810" />
+    </state>
+    <state x="321" y="148" key="Vcs.Push.Dialog.v2/0.23.1440.810@0.23.1440.810" timestamp="1601831590886" />
     <state x="518" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601828855014">
       <screen x="0" y="23" width="1440" height="810" />
     </state>

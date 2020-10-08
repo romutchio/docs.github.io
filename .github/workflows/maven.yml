@@ -22,7 +22,7 @@ jobs:
       with:
         java-version: 1.15
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B package --file backend/pom.xml
     - name: Build, Push and Deploy to Heroku
       id: heroku
       uses: jctaveras/heroku-deploy@v2.0.0
