@@ -40,7 +40,7 @@ jobs:
           repository: docs-io/web
           tags: latest
       - name: Build push Github Packages
-        uses: docker/build-push-action@v1
+        uses: docker/build-push-action@v2
         with:
           registry: docker.pkg.github.com
           repository: ${{ github.repository }}/server
