@@ -1,4 +1,4 @@
-package com._742pm.docs.greeting;
+package com._742pm.docs.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
