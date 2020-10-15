@@ -4,7 +4,6 @@
     min-height: 40px;
 
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 10px;
 
@@ -12,11 +11,16 @@
     color: #fff8ef;
 }
 
-.password-area {
+.flex-box {
+    flex: 1;
     display: flex;
-    align-items: center;
+    justify-content: center;
 }
 
-.password-area .lock-container {
-    margin-right: 5px;
+.app-header .flex-box:first-child > * {
+    margin-right: auto;
+}
+
+.app-header .flex-box:last-child > *  {
+    margin-left: auto;
 }

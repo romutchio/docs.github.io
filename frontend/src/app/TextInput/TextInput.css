@@ -1,0 +1,7 @@
+.text-input {
+    border-radius: 5px;
+    border: 1px solid #eee;
+    outline: none;
+    padding: 8px 20px;
+    line-height: 20px;
+}
