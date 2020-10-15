@@ -11,3 +11,12 @@
     background-color: #4f4c4a;
     color: #fff8ef;
 }
+
+.password-area {
+    display: flex;
+    align-items: center;
+}
+
+.password-area .lock-container {
+    margin-right: 5px;
+}

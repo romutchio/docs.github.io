@@ -1,0 +1,14 @@
+.account {
+    display: flex;
+    align-items: center;
+}
+
+#account-avatar {
+    margin-right: 5px;
+    background-color: #fff8ef;
+    border-radius: 10px;
+}
+
+#account-name {
+    font-size: 24px;
+}
