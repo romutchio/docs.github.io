@@ -28,9 +28,16 @@ export default class Password extends React.Component {
                     placeholder={this.state.isUnlocked ? 'Введите свое код-слово' : null}
                     onBlur={e => this.lock(e.target.value)}
                     inputRef={this.ref}
+                    onKeyPress={this.onEnter}
                 />
             </div>
         );
+    }
+
+    onEnter = e => {
+        if (e.key === 'Enter') {
+            this.ref.current.blur()
+        }
     }
 
     lock = password => {
