@@ -3,12 +3,13 @@ import './Header.css';
 
 import Account from "../Account/Account";
 import Password from "../Password/Password";
+import AppName from "../AppName/AppName";
 
 export default function Header() {
     return (
         <header className='app-header'>
             <div className='flex-box'>
-                <h1>Docs.io</h1>
+                <AppName/>
             </div>
             <div className='flex-box'>
                 <Password/>
