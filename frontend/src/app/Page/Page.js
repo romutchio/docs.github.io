@@ -3,6 +3,8 @@ import './Page.css';
 
 import Doggos from "../Doggos/Doggos";
 import UpButton from "../UpButton/UpButton";
+import Search from "../Search/Search";
+import Tags from "../Tags/Tags";
 
 export default class Page extends React.Component {
     constructor(props) {
@@ -14,6 +16,8 @@ export default class Page extends React.Component {
     render() {
         return (
             <article className='app-page' ref={this.ref}>
+                <Search/>
+                <Tags/>
                 <h1>Hello there!</h1>
                 <h3>Work in progress...</h3>
                 <Doggos/>

@@ -1,0 +1,26 @@
+.tags {
+    width: 80%;
+    max-width: 700px;
+    flex: 1 0 auto;
+
+    margin-top: 20px;
+
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: hidden;
+    max-height: 125px;
+}
+
+.tag {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: none;
+    padding: 5px 15px;
+    background-color: #4f4c4a;
+    color: #fff8ef;
+}
+
+.tag:last-child {
+    margin-right: 0;
+}
