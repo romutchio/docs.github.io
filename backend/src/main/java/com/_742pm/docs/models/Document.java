@@ -31,4 +31,8 @@ public class Document {
     public void setName(String name) {
         this.name = name;
     }
+
+    public UUID getUserId() {
+        return userId;
+    }
 }

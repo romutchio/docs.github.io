@@ -26,4 +26,12 @@ public class Tag {
         this.documentId = documentId;
         this.userId = userId;
     }
+
+    public UUID getDocumentId() {
+        return documentId;
+    }
+
+    public UUID getUserId() {
+        return userId;
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class DocumentService implements IDocumentService{
@@ -39,6 +40,12 @@ public class DocumentService implements IDocumentService{
     @Override
     public List<Document> findAll(User user) {
         return repository.findDocumentsByUserId(user.getId());
+    }
+
+    @Override
+    public List<Document> findByQuery(String query, User user) {
+        var documents = repository.findDocumentsByNameContains(query);
+        return documents.stream().filter(x -> x.getUserId().equals(user.getId())).collect(Collectors.toList());
     }
 
     @Override
