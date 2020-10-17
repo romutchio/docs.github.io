@@ -10,5 +10,6 @@ import java.util.UUID;
 @Repository
 public interface DocumentRepository extends CrudRepository<Document, UUID> {
     List<Document> findDocumentsByUserId(UUID user_id);
+    List<Document> findDocumentsByNameContains(String query);
 }
 

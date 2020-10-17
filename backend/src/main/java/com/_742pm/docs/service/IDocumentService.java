@@ -11,8 +11,9 @@ import java.util.UUID;
 @Service
 public interface IDocumentService {
     Optional<Document> getById(UUID id);
-    void delete(UUID id);
-    void update(UUID documentId, Document document);
     List<Document> findAll(User user);
+    List<Document> findByQuery(String query, User user);
     void create(Document document);
+    void update(UUID documentId, Document document);
+    void delete(UUID id);
 }

@@ -18,13 +18,11 @@ public class UserController {
 
     @GetMapping("/user")
     public List<User> findUsers() {
-
         return userService.findAll();
     }
 
     @PostMapping("/users")
     public void createUser(@RequestBody User user) {
-
         userService.create(user);
     }
 
