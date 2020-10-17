@@ -9,7 +9,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .antMatcher("/**").authorizeRequests()
-                .antMatchers(new String[]{"/", "/greeting"}).permitAll()
+                .antMatchers(new String[]{"/", "/swagger-ui.html"}).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login();
