@@ -9,6 +9,7 @@
     flex-wrap: wrap;
     overflow-y: hidden;
     max-height: 125px;
+    align-content: flex-start;
 }
 
 .tag {
@@ -19,6 +20,7 @@
     padding: 5px 15px;
     background-color: #4f4c4a;
     color: #fff8ef;
+    max-height: 35px;
 }
 
 .tag:last-child {

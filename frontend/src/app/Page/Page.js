@@ -1,10 +1,11 @@
 import React from "react";
 import './Page.css';
 
-import Doggos from "../Doggos/Doggos";
-import UpButton from "../UpButton/UpButton";
 import Search from "../Search/Search";
 import Tags from "../Tags/Tags";
+import Documents from "../Documents/Documents";
+import Footer from "../Footer/Footer";
+import FixedButtons from "../FixedButtons/FixedButtons";
 
 export default class Page extends React.Component {
     constructor(props) {
@@ -18,10 +19,9 @@ export default class Page extends React.Component {
             <article className='app-page' ref={this.ref}>
                 <Search/>
                 <Tags/>
-                <h1>Hello there!</h1>
-                <h3>Work in progress...</h3>
-                <Doggos/>
-                <UpButton onClick={this.scrollUp} />
+                <Documents />
+                <FixedButtons onUpClick={this.scrollUp} />
+                <Footer/>
             </article>
         );
     }
