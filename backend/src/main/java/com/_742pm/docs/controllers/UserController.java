@@ -25,11 +25,6 @@ public class UserController {
         return userService.findAll();
     }
 
-    @GetMapping("/users")
-    public User authenticate() {
-        return userService.findAll().get(0);
-    }
-
     @PostMapping("/users")
     public void createUser(@RequestBody User user) {
         userService.create(user);
