@@ -30,9 +30,14 @@ public class UserController {
         userService.create(user);
     }
 
-    @GetMapping("/user")
-    public Map<String, Object> user(@AuthenticationPrincipal OAuth2User principal) {
+    @GetMapping("/me")
+    public Map<String, Object> me(@AuthenticationPrincipal OAuth2User principal) {
         return principal.getAttributes();
+    }
+
+    @GetMapping("/user")
+    public User user(@AuthenticationPrincipal OAuth2User principal) {
+        return User.fromPrincipal(principal);
     }
 
 }
