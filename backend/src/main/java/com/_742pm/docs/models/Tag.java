@@ -1,5 +1,7 @@
 package com._742pm.docs.models;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -11,10 +13,13 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @ApiModelProperty(name = "Название тэга")
     private String name;
 
+    @ApiModelProperty(name = "UUID докуманта")
     private UUID documentId;
 
+    @ApiModelProperty(name = "UUID пользователя")
     private UUID userId;
 
     public Tag() {

@@ -6,6 +6,7 @@ import com._742pm.docs.repository.DocumentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -33,6 +34,8 @@ public class DocumentService implements IDocumentService{
         if (doc != null) {
             if (!document.getName().equals(doc.getName()))
                 doc.setName(document.getName());
+            if (!Arrays.equals(document.getData(), doc.getData()))
+                doc.setData(doc.getData());
             repository.save(doc);
         }
     }

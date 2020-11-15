@@ -1,5 +1,7 @@
 package com._742pm.docs.models;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -11,10 +13,13 @@ public class Document {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @ApiModelProperty(name = "Название документа")
     private String name;
 
+    @ApiModelProperty(name = "UUID пользователя")
     private UUID userId;
 
+    @ApiModelProperty(name = "Байтовое представление данных")
     private Byte[] data;
 
     public Document() {
@@ -41,5 +46,13 @@ public class Document {
 
     public UUID getId() {
         return id;
+    }
+
+    public Byte[] getData() {
+        return data;
+    }
+
+    public void setData(Byte[] data) {
+        this.data = data;
     }
 }

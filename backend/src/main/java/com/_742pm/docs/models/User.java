@@ -1,5 +1,7 @@
 package com._742pm.docs.models;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,8 +17,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @ApiModelProperty(name = "Имя пользователя")
     private String name;
 
+    @ApiModelProperty(name = "Ссылка на аватарку")
     private String image_url;
 
     public User() {
