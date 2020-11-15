@@ -46,7 +46,9 @@ public class DocumentService implements IDocumentService
                 doc.setName(document.getName());
             }
             if (!Arrays.equals(document.getData(), doc.getData()))
+            {
                 doc.setData(doc.getData());
+            }
             repository.save(doc);
         }
     }
@@ -65,7 +67,6 @@ public class DocumentService implements IDocumentService
     }
 
     @Override
-    public Document create(Document document) {
     public List<Document> findByTag(String tag, User user)
     {
         return tagService.findDocumentsByTag(tag, user)
@@ -74,11 +75,10 @@ public class DocumentService implements IDocumentService
                          .collect(Collectors.toList());
     }
 
-        return repository.save(document);
     @Override
-    public UUID create(Document document)
+    public Document create(Document document)
     {
 
-        return repository.save(document).getId();
+        return repository.save(document);
     }
 }

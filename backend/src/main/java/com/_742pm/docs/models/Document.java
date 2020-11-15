@@ -7,7 +7,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "documents")
-public class Document {
+public class Document
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,40 +23,45 @@ public class Document {
     @ApiModelProperty(name = "Байтовое представление данных")
     private Byte[] data;
 
-    public Document() {
+    public Document()
+    {
     }
 
-    public Document(UUID id, String name, UUID userId, Byte[] data) {
+    public Document(UUID id, String name, UUID userId, Byte[] data)
+    {
         this.id = id;
         this.name = name;
         this.userId = userId;
         this.data = data;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-    public UUID getUserId() {
+    public UUID getUserId()
+    {
         return userId;
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public Byte[] getData() {
+    public Byte[] getData()
+    {
         return data;
     }
 
-    public void setData(Byte[] data) {
+    public void setData(Byte[] data)
+    {
         this.data = data;
     }
-    public UUID getId() {
+
+    public UUID getId()
+    {
         return id;
     }
 }

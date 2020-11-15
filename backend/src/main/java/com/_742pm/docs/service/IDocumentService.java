@@ -15,7 +15,6 @@ public interface IDocumentService {
     List<Document> findByQuery(String query, User user);
 
     List<Document> findByTag(String query, User user);
-    UUID create(Document document);
     Document create(Document document);
     void update(UUID documentId, Document document);
     void delete(UUID id);
