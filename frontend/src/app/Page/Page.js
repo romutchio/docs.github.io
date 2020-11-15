@@ -6,11 +6,17 @@ import Tags from "../Tags/Tags";
 import Documents from "../Documents/Documents";
 import Footer from "../Footer/Footer";
 import FixedButtons from "../FixedButtons/FixedButtons";
+import Modal from "../Modal/Modal";
+import CreateModal from "../CreateModal/CreateModal";
 
 export default class Page extends React.Component {
     constructor(props) {
         super(props);
         this.ref = React.createRef();
+
+        this.state = {
+            modalShown: false
+        }
     }
 
 
@@ -19,15 +25,28 @@ export default class Page extends React.Component {
             <article className='app-page' ref={this.ref}>
                 <Search/>
                 <Tags/>
-                <Documents />
-                <FixedButtons onUpClick={this.scrollUp} />
+                <Documents/>
+                <FixedButtons onUpClick={this.scrollUp} onAddClick={this.createDocument}/>
                 <Footer/>
+                {
+                    this.state.modalShown &&
+                    <Modal onClose={this.closeModal}>
+                        <CreateModal onCreate={this.closeModal}/>
+                    </Modal>
+                }
             </article>
         );
     }
 
     scrollUp = () => {
-        console.log(123);
         this.ref.current.scrollTo(0, 0);
+    }
+
+    createDocument = () => {
+        this.setState({modalShown: true});
+    }
+
+    closeModal = () => {
+        this.setState({modalShown: false});
     }
 }
