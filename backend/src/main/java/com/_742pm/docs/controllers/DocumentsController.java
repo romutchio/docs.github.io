@@ -20,16 +20,14 @@ public class DocumentsController
     @Autowired
     private IDocumentService documentService;
 
-    @Autowired
-
-    @GetMapping(value = "/documents", params = "query")
+    @GetMapping(value = "/documents/query", params = "query")
     public List<Document> getDocumentsByQuery(@RequestParam(name = "query") String query, @AuthenticationPrincipal OAuth2User principal)
     {
         var user = User.fromPrincipal(principal);
         return documentService.findByQuery(query, user);
     }
 
-    @GetMapping(value = "/documents", params = "tag")
+    @GetMapping(value = "/documents/tag", params = "tag")
     public List<Document> getDocumentsByTag(@RequestParam(name = "tag") String tag, @AuthenticationPrincipal OAuth2User principal)
     {
         var user = User.fromPrincipal(principal);
