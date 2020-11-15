@@ -6,6 +6,7 @@ import com._742pm.docs.repository.DocumentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -44,6 +45,8 @@ public class DocumentService implements IDocumentService
             {
                 doc.setName(document.getName());
             }
+            if (!Arrays.equals(document.getData(), doc.getData()))
+                doc.setData(doc.getData());
             repository.save(doc);
         }
     }
@@ -62,6 +65,7 @@ public class DocumentService implements IDocumentService
     }
 
     @Override
+    public Document create(Document document) {
     public List<Document> findByTag(String tag, User user)
     {
         return tagService.findDocumentsByTag(tag, user)
@@ -70,6 +74,7 @@ public class DocumentService implements IDocumentService
                          .collect(Collectors.toList());
     }
 
+        return repository.save(document);
     @Override
     public UUID create(Document document)
     {

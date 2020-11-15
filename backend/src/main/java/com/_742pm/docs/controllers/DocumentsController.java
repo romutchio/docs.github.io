@@ -48,7 +48,7 @@ public class DocumentsController
     @PostMapping("/documents")
     public UUID postDocument(@RequestBody Document document)
     {
-        return documentService.create(document);
+        return documentService.create(document).getId();
     }
 
     @PutMapping("/documents/{id}")
