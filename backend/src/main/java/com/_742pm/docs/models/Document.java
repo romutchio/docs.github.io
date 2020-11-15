@@ -15,12 +15,12 @@ public class Document {
 
     private UUID userId;
 
-    private byte[] data;
+    private Byte[] data;
 
     public Document() {
     }
 
-    public Document(UUID id, String name, UUID userId, byte[] data) {
+    public Document(UUID id, String name, UUID userId, Byte[] data) {
         this.id = id;
         this.name = name;
         this.userId = userId;
