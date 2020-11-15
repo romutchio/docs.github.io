@@ -36,10 +36,6 @@ public class DocumentsController {
         return documentService.findAll(user);
     }
 
-    @GetMapping("/documents")
-    public List<Document> getDocuments() {
-        return null;
-    }
 
     @PostMapping("/documents")
     public void postDocument(@RequestBody Document document) {
