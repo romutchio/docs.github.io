@@ -15,13 +15,16 @@ public class Document {
 
     private UUID userId;
 
+    private byte[] data;
+
     public Document() {
     }
 
-    public Document(UUID id, String name, UUID userId) {
+    public Document(UUID id, String name, UUID userId, byte[] data) {
         this.id = id;
         this.name = name;
         this.userId = userId;
+        this.data = data;
     }
 
     public String getName() {
@@ -34,5 +37,9 @@ public class Document {
 
     public UUID getUserId() {
         return userId;
+    }
+
+    public UUID getId() {
+        return id;
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -38,9 +39,9 @@ public class DocumentsController {
 
 
     @PostMapping("/documents")
-    public void postDocument(@RequestBody Document document) {
+    public UUID postDocument(@RequestBody Document document) {
 
-        documentService.create(document);
+        return documentService.create(document).getId();
     }
 }
 

@@ -49,8 +49,8 @@ public class DocumentService implements IDocumentService{
     }
 
     @Override
-    public void create(Document document) {
+    public Document create(Document document) {
 
-        repository.save(document);
+        return repository.save(document);
     }
 }

@@ -13,7 +13,7 @@ public interface IDocumentService {
     Optional<Document> getById(UUID id);
     List<Document> findAll(User user);
     List<Document> findByQuery(String query, User user);
-    void create(Document document);
+    Document create(Document document);
     void update(UUID documentId, Document document);
     void delete(UUID id);
 }
