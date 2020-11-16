@@ -1,5 +1,5 @@
   
-FROM node as frontend
+FROM node:15.2 as frontend
 WORKDIR /frontend
 COPY frontend .
 RUN npm ci

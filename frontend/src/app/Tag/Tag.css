@@ -1,0 +1,19 @@
+.tag.tag {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding: 5px 15px;
+    max-height: 35px;
+    background-color: #fff8ef;
+    transition: box-shadow 0.2s;
+    box-shadow: inset #4f4c4a 0 0 0 20px;
+}
+
+.tag.chosen {
+    box-shadow: inset #4f4c4a 0 0 8px 5px;
+    color: #4f4c4a;
+}
+
+.tag:last-child {
+    margin-right: 0;
+}
