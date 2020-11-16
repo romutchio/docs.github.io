@@ -1,5 +1,6 @@
 package com._742pm.docs.models;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "documents")
+@JsonDeserialize(using = DocumentDeserializer.class)
 public class Document
 {
 
