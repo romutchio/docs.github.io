@@ -73,15 +73,7 @@
 }
 
 .create-modal-button {
-    border: none;
-    outline: none;
-
-    background-color: #4f4c4a;
-    color: #fff8ef;
-
     padding: 5px 15px;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
 .create-modal-button:hover {

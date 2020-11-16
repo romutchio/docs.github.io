@@ -12,14 +12,11 @@
     align-content: flex-start;
 }
 
-.tag {
+.tags .tag {
     margin-right: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
-    border: none;
     padding: 5px 15px;
-    background-color: #4f4c4a;
-    color: #fff8ef;
     max-height: 35px;
 }
 
