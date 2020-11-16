@@ -1,5 +1,9 @@
 package com._742pm.docs.models;
 
+import org.springframework.security.oauth2.core.user.OAuth2User;
+
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,12 +15,15 @@ import javax.persistence.Table;
 @Table(name = "users")
 public class User {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @ApiModelProperty(name = "Имя пользователя")
     private String name;
 
+    @ApiModelProperty(name = "Ссылка на аватарку")
     private String image_url;
 
     public User() {
@@ -31,4 +38,12 @@ public class User {
     public UUID getId() {
         return id;
     }
+
+    public static User fromPrincipal(OAuth2User principal) {
+        var id =  UUID.nameUUIDFromBytes(principal.<String>getAttribute("sub").getBytes());
+        var name =  principal.<String>getAttribute("name");
+        var picture =  principal.<String>getAttribute("picture");
+        return new User(id, name, picture);
+    }
+
 }
