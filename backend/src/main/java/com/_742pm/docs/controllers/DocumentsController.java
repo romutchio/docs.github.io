@@ -41,24 +41,5 @@ public class DocumentsController
         var user = User.fromPrincipal(principal);
         return documentService.findAll(user);
     }
-
-
-    @PostMapping("/documents")
-    public UUID postDocument(@RequestBody Document document)
-    {
-        return documentService.create(document).getId();
-    }
-
-    @PutMapping("/documents/{id}")
-    public void updateDocument(@RequestBody Document document, @PathVariable("id") UUID id)
-    {
-        documentService.update(id, document);
-    }
-
-    @DeleteMapping("/documents/{id}")
-    public void deleteDocument(@PathVariable("id") UUID id)
-    {
-        documentService.delete(id);
-    }
 }
 
