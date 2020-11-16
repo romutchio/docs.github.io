@@ -16,6 +16,10 @@ export default class Password extends React.Component {
         this.state = {
             isUnlocked: password == null
         }
+
+        if (password) {
+            props.onChange(password);
+        }
     }
 
     render() {
@@ -41,10 +45,13 @@ export default class Password extends React.Component {
         localStorage.setItem(PASSWORD_KEY, password);
         this.ref.current.value = '';
         this.setState({isUnlocked: false});
+
+        this.props.onChange(password);
     }
 
     unlock = () => {
         localStorage.removeItem(PASSWORD_KEY);
         this.setState({isUnlocked: true});
+        this.props.onChange(null);
     }
 }

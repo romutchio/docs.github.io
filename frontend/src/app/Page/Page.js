@@ -26,12 +26,16 @@ export default class Page extends React.Component {
                 <Search/>
                 <Tags/>
                 <Documents/>
-                <FixedButtons onUpClick={this.scrollUp} onAddClick={this.createDocument}/>
+                <FixedButtons
+                    showAddButton={this.props.password}
+                    onUpClick={this.scrollUp}
+                    onAddClick={this.createDocument}
+                />
                 <Footer/>
                 {
                     this.state.modalShown &&
                     <Modal onClose={this.closeModal}>
-                        <CreateModal onCreate={this.closeModal}/>
+                        <CreateModal password={this.props.password} onCreate={this.closeModal}/>
                     </Modal>
                 }
             </article>

@@ -2,8 +2,10 @@ import React from "react";
 import './CreateModal.css';
 
 import TextInput from "../TextInput/TextInput";
+import Button from "../Button/Button";
 
 import fileIcon from "../../images/attach_file-white-48dp.svg"
+import AES from 'crypto-js/aes'
 
 export default class CreateModal extends React.Component {
 
@@ -45,15 +47,23 @@ export default class CreateModal extends React.Component {
                     {this.state.filename || 'Выберите файл'}
                     <input type='file' className='create-modal-file' onChange={this.getFile}/>
                 </label>
-                <button className='create-modal-button' onClick={this.save}>
+                <Button
+                    className='create-modal-button'
+                    disabled={!this.state.encrypted}
+                    disabledTitle='Файл не выбран'
+                    onClick={this.save}
+                >
                     Сохранить
-                </button>
+                </Button>
             </div>
         );
     }
 
-    getFile = e => {
-        this.setState({filename: e.target.files[0]?.name});
+    getFile = async e => {
+        const file = e.target.files[0];
+        this.setState({filename: file?.name});
+
+        await this.processFile(file);
     }
 
     addTag = e => {
@@ -75,5 +85,13 @@ export default class CreateModal extends React.Component {
 
     save = () => {
         this.props.onCreate();
+    }
+
+    processFile = async file => {
+        const text = await file?.text();
+        const encrypted = AES.encrypt(text, this.props.password);
+        console.log(encrypted.toString());
+
+        this.setState({encrypted})
     }
 }

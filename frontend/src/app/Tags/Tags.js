@@ -1,5 +1,6 @@
 import React from "react";
 import './Tags.css';
+import Button from "../Button/Button";
 
 export default class Tags extends React.Component {
     constructor(props) {
@@ -29,9 +30,9 @@ export default class Tags extends React.Component {
             <div className='tags'>
                 {
                     this.state.tags.map(t => (
-                        <button className='tag' key={t.id} onClick={() => onTagClick && onTagClick(t.id)}>
+                        <Button className='tag' key={t.id} onClick={() => onTagClick && onTagClick(t.id)}>
                             {t.name}
-                        </button>
+                        </Button>
                     ))
                 }
             </div>

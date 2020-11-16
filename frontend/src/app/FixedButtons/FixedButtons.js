@@ -1,15 +1,20 @@
 import React from "react";
 import './FixedButtons.css';
 
-export default function FixedButtons({onUpClick, onAddClick}) {
+import Button from "../Button/Button";
+
+export default function FixedButtons({onUpClick, onAddClick, showAddButton}) {
     return (
         <div className='fixed-buttons'>
-            <button className='fixed-button' id='add-button' onClick={onAddClick}>
-                +
-            </button>
-            <button className='fixed-button' onClick={onUpClick}>
+            {
+                showAddButton &&
+                <Button className='fixed-button add-button' onClick={onAddClick}>
+                    +
+                </Button>
+            }
+            <Button className='fixed-button' onClick={onUpClick}>
                 &#8593;
-            </button>
+            </Button>
         </div>
     );
 }
