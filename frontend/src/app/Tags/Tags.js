@@ -1,6 +1,7 @@
 import React from "react";
 import './Tags.css';
-import Button from "../Button/Button";
+
+import Tag from "../Tag/Tag";
 
 export default class Tags extends React.Component {
     constructor(props) {
@@ -24,15 +25,13 @@ export default class Tags extends React.Component {
 
 
     render() {
-        const {onTagClick} = this.props;
-
         return (
             <div className='tags'>
                 {
                     this.state.tags.map(t => (
-                        <Button className='tag' key={t.id} onClick={() => onTagClick && onTagClick(t.id)}>
+                        <Tag key={t.id} tagId={t.id} onClick={this.onTagClick}>
                             {t.name}
-                        </Button>
+                        </Tag>
                     ))
                 }
             </div>
