@@ -38,6 +38,10 @@ export default class Tags extends React.Component {
         );
     }
 
+    onTagClick = tagId => {
+        
+    }
+
     componentDidMount() {
         // get tags from backend
     }
