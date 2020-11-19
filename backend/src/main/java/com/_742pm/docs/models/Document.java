@@ -8,7 +8,6 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "documents")
-@JsonDeserialize(using = DocumentDeserializer.class)
 public class Document
 {
 

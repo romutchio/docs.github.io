@@ -1,6 +1,7 @@
 package com._742pm.docs.controllers;
 
 import com._742pm.docs.models.Document;
+import com._742pm.docs.models.Person;
 import com._742pm.docs.service.IDocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,13 +21,20 @@ public class DocumentController
         return documentService.getById(id).orElse(null);
     }
 
-    @PostMapping("/document")
+    @PostMapping(value = "/document", consumes = "application/json", produces = "application/json")
     public UUID postDocument(@RequestBody Document document)
     {
         return documentService.create(document).getId();
     }
 
-    @PutMapping("/document/{id}")
+    @PostMapping(value  = "/person", consumes = "application/json", produces = "application/json")
+    public Person postPerson(@RequestBody Person document)
+    {
+        return new Person(document.getId()  +  10000, document.getName() + "_got");
+    }
+
+
+    @PutMapping(value = "/document/{id}", consumes = "application/json")
     public void updateDocument(@RequestBody Document document, @PathVariable("id") UUID id)
     {
         documentService.update(id, document);
