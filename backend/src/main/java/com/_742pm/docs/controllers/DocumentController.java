@@ -18,8 +18,8 @@ public class DocumentController
     @Autowired
     private IDocumentService documentService;
 
-    @GetMapping("/document")
-    public Document getDocument(@RequestBody UUID id)
+    @GetMapping("/document/{id}")
+    public Document getDocument(@PathVariable("id") UUID id)
     {
         return documentService.getById(id).orElse(null);
     }
