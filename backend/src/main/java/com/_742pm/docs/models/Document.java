@@ -24,6 +24,12 @@ public class Document
     @ApiModelProperty(name = "Байтовое представление данных")
     private Byte[] data;
 
+    public Document( String name, UUID userId, Byte[] data)
+    {
+        this.name = name;
+        this.userId = userId;
+        this.data = data;
+    }
     public Document()
     {
     }
