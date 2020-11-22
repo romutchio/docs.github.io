@@ -3,6 +3,7 @@ package com._742pm.docs.service;
 import com._742pm.docs.models.Document;
 import com._742pm.docs.models.User;
 import com._742pm.docs.repository.DocumentRepository;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,7 @@ public class DocumentService implements IDocumentService
             {
                 doc.setName(document.getName());
             }
-            if (!Arrays.equals(document.getData(), doc.getData()))
+            if (!(document.getData().equals(doc.getData())))
             {
                 doc.setData(doc.getData());
             }

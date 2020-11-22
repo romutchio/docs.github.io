@@ -14,7 +14,7 @@ CREATE TABLE documents(
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     name VARCHAR(255),
     user_id UUID,
-    data BYTEA
+    data text
 );
 
 CREATE TABLE tags(
