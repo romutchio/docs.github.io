@@ -15,17 +15,27 @@ export default class Page extends React.Component {
         this.ref = React.createRef();
 
         this.state = {
-            modalShown: false
+            modalShown: false,
+            documents: []
         }
     }
 
+    componentDidMount() {
+        const documents = []
+
+        for (let i = 0; i < 20; i++) {
+            documents.push({id: i, name: `документ #${i + 1}`});
+        }
+
+        this.setState({documents});
+    }
 
     render() {
         return (
             <article className='app-page' ref={this.ref}>
                 <Search/>
                 <Tags/>
-                <Documents/>
+                <Documents documents={this.state.documents}/>
                 <FixedButtons
                     showAddButton={this.props.password}
                     onUpClick={this.scrollUp}
@@ -35,7 +45,7 @@ export default class Page extends React.Component {
                 {
                     this.state.modalShown &&
                     <Modal onClose={this.closeModal}>
-                        <CreateModal password={this.props.password} onCreate={this.closeModal}/>
+                        <CreateModal password={this.props.password} onCreate={this.addDocument}/>
                     </Modal>
                 }
             </article>
@@ -50,7 +60,18 @@ export default class Page extends React.Component {
         this.setState({modalShown: true});
     }
 
-    closeModal = () => {
-        this.setState({modalShown: false});
+    addDocument = async document => {
+        const id = await this.sendDocument(document);
+
+        this.setState({
+            modalShown: false,
+            documents: [...this.state.documents, {id, name: document.name}]
+        });
+    }
+
+    sendDocument = async document => {
+        console.log(document);
+
+        return document.name
     }
 }

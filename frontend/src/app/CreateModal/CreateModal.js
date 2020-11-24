@@ -24,7 +24,13 @@ export default class CreateModal extends React.Component {
     render() {
         return (
             <div className='create-modal'>
-                <TextInput placeholder='Введите имя' className='create-modal-name'/>
+                <TextInput
+                    placeholder='Введите имя'
+                    className='create-modal-name'
+                    onBlur={this.setName}
+                >
+                    {this.state.name}
+                </TextInput>
                 <div className='create-modal-tags'>
                     {
                         this.state.tags.map(tag => (
@@ -49,14 +55,18 @@ export default class CreateModal extends React.Component {
                 </label>
                 <Button
                     className='create-modal-button'
-                    disabled={!this.state.encrypted}
-                    disabledTitle='Файл не выбран'
+                    disabled={!this.state.file || !this.state.name}
+                    disabledTitle={this.state.name ? 'Выберите файл' : 'Введите имя документа'}
                     onClick={this.save}
                 >
                     Сохранить
                 </Button>
             </div>
         );
+    }
+
+    setName = e => {
+        this.setState({name: e.target.value});
     }
 
     getFile = async e => {
@@ -84,14 +94,25 @@ export default class CreateModal extends React.Component {
     }
 
     save = () => {
-        this.props.onCreate();
+        if (!this.state.name || !this.state.file) {
+            return;
+        }
+
+        const document = {
+            name: this.state.name,
+            tags: this.state.tags,
+            file: this.state.file
+        };
+
+        this.props.onCreate(document);
     }
 
     processFile = async file => {
         const text = await file?.text();
         const encrypted = AES.encrypt(text, this.props.password);
-        console.log(encrypted.toString());
 
-        this.setState({encrypted})
+        const result = `data:${file.type};base64,${encrypted.toString()}`;
+
+        this.setState({file: result})
     }
 }
