@@ -104,7 +104,12 @@ export default class CreateModal extends React.Component {
             file: this.state.file
         };
 
-        this.props.onCreate(document);
+        this.sendDocument(document);
+        this.props.onCreate();
+    }
+
+    sendDocument = async document => {
+        console.log(document)
     }
 
     processFile = async file => {

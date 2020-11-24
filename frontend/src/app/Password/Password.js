@@ -29,7 +29,7 @@ export default class Password extends React.Component {
                 <TextInput
                     className={this.state.isUnlocked ? 'unlocked' : 'locked'}
                     hideLetters={true}
-                    placeholder={this.state.isUnlocked ? 'Введите свое код-слово' : null}
+                    placeholder={this.state.isUnlocked ? 'Введите свой пароль' : null}
                     onBlur={e => this.lock(e.target.value)}
                     inputRef={this.ref}
                 />
