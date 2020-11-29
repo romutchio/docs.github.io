@@ -14,10 +14,9 @@ export default class CreateModal extends React.Component {
 
         this.ref = React.createRef();
         this.state = {
-            tags: [
-                'tag', 'тэг', 'longer',
-                'more', 'tags', 'to', 'god of tags'
-            ]
+            name: props.name,
+            filename: props.name ? `Файл - ${props.name}` : null,
+            tags: props.tags ?? []
         }
     }
 
@@ -51,11 +50,16 @@ export default class CreateModal extends React.Component {
                     <img src={fileIcon} alt='file'/>
                 </span>
                     {this.state.filename || 'Выберите файл'}
-                    <input type='file' className='create-modal-file' onChange={this.getFile}/>
+                    <input
+                        type='file'
+                        className={`create-modal-file ${this.props.enableChangeFile ? '' : 'disabled'}`}
+                        onChange={this.getFile}
+                        title={this.props.enableChangeFile ? null : 'Введите пароль'}
+                    />
                 </label>
                 <Button
                     className='create-modal-button'
-                    disabled={!this.state.file || !this.state.name}
+                    disabled={!this.state.name || (!this.props.edit && !this.state.file)}
                     disabledTitle={this.state.name ? 'Выберите файл' : 'Введите имя документа'}
                     onClick={this.save}
                 >
@@ -70,6 +74,10 @@ export default class CreateModal extends React.Component {
     }
 
     getFile = async e => {
+        if (this.props.enableChangeFile) {
+            return;
+        }
+
         const file = e.target.files[0];
         this.setState({filename: file?.name});
 
@@ -94,7 +102,7 @@ export default class CreateModal extends React.Component {
     }
 
     save = () => {
-        if (!this.state.name || !this.state.file) {
+        if (!this.state.name || (!this.props.edit && !this.state.file)) {
             return;
         }
 

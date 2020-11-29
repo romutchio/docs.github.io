@@ -20,7 +20,7 @@ export default class Page extends React.Component {
     render() {
         return (
             <article className='app-page' ref={this.ref}>
-                <DocumentsPage/>
+                <DocumentsPage password={this.props.password}/>
                 <FixedButtons
                     enableAddButton={this.props.password}
                     onUpClick={this.scrollUp}
