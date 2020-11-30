@@ -8,6 +8,8 @@
     background-color: #fff8ef;
     border-radius: 10px;
     user-select: none;
+    height: 48px;
+    width: 48px;
 }
 
 #account-name {
