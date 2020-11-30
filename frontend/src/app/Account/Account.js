@@ -7,7 +7,7 @@ export default class Account extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: 'Name Surname',
+            name: 'Имя пользователя',
             avatar: defaultAvatar
         }
     }
@@ -24,8 +24,16 @@ export default class Account extends React.Component {
         );
     }
 
-    componentDidMount() {
-        // get account info from backend
+    async componentDidMount() {
+        const response = await fetch('/me');
+
+        if (response.status !== 200) {
+            console.error(response.status, response.statusText);
+            return;
+        }
+
+        const user = await response.json();
+        this.setState({name: user.name, avatar: user.picture});
     }
 }
 
