@@ -11,8 +11,6 @@ import java.util.UUID;
 @Table(name = "documents")
 public class Document
 {
-    @ApiModelProperty(name = "Теги документа")
-    private String[] tags;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,9 +25,8 @@ public class Document
     @ApiModelProperty(name = "Байтовое представление данных")
     private String data;
 
-    public Document(String[] tags, String name, UUID userId, String data)
+    public Document(String name, UUID userId, String data)
     {
-        this.tags = tags;
         this.name = name;
         this.userId = userId;
         this.data = data;
@@ -39,9 +36,8 @@ public class Document
     {
     }
 
-    public Document(String[] tags, UUID id, String name, UUID userId, String  data)
+    public Document(UUID id, String name, UUID userId, String data)
     {
-        this.tags = tags;
         this.id = id;
         this.name = name;
         this.userId = userId;
@@ -68,7 +64,7 @@ public class Document
         this.userId = userId;
     }
 
-    public String  getData()
+    public String getData()
     {
         return data;
     }
@@ -83,13 +79,4 @@ public class Document
         return id;
     }
 
-    public String[] getTags()
-    {
-        return tags;
-    }
-
-    public void setTags(String[] tags)
-    {
-        this.tags = tags;
-    }
 }

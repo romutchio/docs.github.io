@@ -86,7 +86,7 @@ public class DocumentService implements IDocumentService
             return List.of();
         }
 
-        return findAll(user).stream().filter(document -> Arrays.asList(document.getTags()).containsAll(tagList)).collect(Collectors.toList());
+        return findAll(user).stream().filter(document -> tagService.getTags(user, document).containsAll(tagList)).collect(Collectors.toList());
     }
 
     @Override
