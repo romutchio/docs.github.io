@@ -28,11 +28,6 @@ public class Document
     @ApiModelProperty(name = "Байтовое представление данных")
     private String data;
 
-    public Document(String name, UUID userId, String data)
-    {
-        this(new String[]{}, name, userId, data);
-    }
-
     public Document(String[] tags, String name, UUID userId, String data)
     {
         this.tags = tags;

@@ -2,6 +2,8 @@ package com._742pm.docs.controllers;
 
 import com._742pm.docs.models.User;
 import com._742pm.docs.service.IUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -17,18 +19,7 @@ import java.util.Map;
 @RestController
 public class UserController {
 
-    @Autowired
-    private IUserService userService;
-
-    @GetMapping("/users")
-    public List<User> findUsers() {
-        return userService.findAll();
-    }
-
-    @PostMapping("/users")
-    public void createUser(@RequestBody User user) {
-        userService.create(user);
-    }
+    Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @GetMapping("/me")
     public Map<String, Object> me(@AuthenticationPrincipal OAuth2User principal) {
@@ -37,7 +28,9 @@ public class UserController {
 
     @GetMapping("/user")
     public User user(@AuthenticationPrincipal OAuth2User principal) {
-        return User.fromPrincipal(principal);
+        var user =  User.fromPrincipal(principal);
+        logger.info("Got user" + user.toString());
+        return user;
     }
 
 }

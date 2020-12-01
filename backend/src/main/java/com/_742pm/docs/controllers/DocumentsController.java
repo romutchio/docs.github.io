@@ -3,19 +3,19 @@ package com._742pm.docs.controllers;
 import com._742pm.docs.models.Document;
 import com._742pm.docs.models.User;
 import com._742pm.docs.service.IDocumentService;
-import com._742pm.docs.service.ITagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
 public class DocumentsController
 {
+
 
     @Autowired
     private IDocumentService documentService;

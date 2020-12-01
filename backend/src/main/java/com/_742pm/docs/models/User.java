@@ -1,5 +1,9 @@
 package com._742pm.docs.models;
 
+import com._742pm.docs.controllers.DocumentsController;
+import com._742pm.docs.controllers.UserController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -15,6 +19,15 @@ import javax.persistence.Table;
 @Table(name = "users")
 public class User {
 
+    @Override
+    public String toString()
+    {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", image_url='" + image_url + '\'' +
+                '}';
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
