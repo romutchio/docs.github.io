@@ -13,10 +13,10 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @ApiModelProperty(name = "Название тэга")
+    @ApiModelProperty(name = "Название тега")
     private String name;
 
-    @ApiModelProperty(name = "UUID докуманта")
+    @ApiModelProperty(name = "UUID документа")
     private UUID documentId;
 
     @ApiModelProperty(name = "UUID пользователя")
@@ -38,5 +38,25 @@ public class Tag {
 
     public UUID getUserId() {
         return userId;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public UUID getId()
+    {
+        return id;
+    }
+
+    public void setId(UUID id)
+    {
+        this.id = id;
     }
 }
