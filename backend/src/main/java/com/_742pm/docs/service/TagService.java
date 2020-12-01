@@ -39,7 +39,8 @@ public class TagService implements ITagService{
     }
 
     @Override
-    public void create(Tag tag) {
+    public UUID create(Tag tag) {
         repository.save(tag);
+        return tag.getId();
     }
 }

@@ -13,5 +13,5 @@ public interface ITagService {
     List<Tag> findAll(User user);
     List<Tag> getTags(User user, Document document);
     List<UUID> findDocumentsByTag(String tag, User user);
-    void create(Tag tag);
+    UUID create(Tag tag);
 }

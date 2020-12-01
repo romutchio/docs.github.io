@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -45,8 +46,8 @@ public class TagController {
 
     @PostMapping(value = "/tags", consumes = "application/json")
     @ApiOperation("Позволяет добавить тег к документу для пользователя.")
-    public void addTag(@RequestBody Tag tag) {
-        tagService.create(tag);
+    public void addTag(@RequestBody Tag[] tags) {
+        Arrays.stream(tags).parallel().map(tag -> tagService.create(tag));
     }
 
 }
