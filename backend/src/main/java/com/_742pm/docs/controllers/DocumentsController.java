@@ -59,22 +59,6 @@ public class DocumentsController
         return queryDocs;
     }
 
-    @GetMapping(value = "/documents/query", params = "query")
-    @ApiOperation("Позволяет найти документы, содержащие подстроку 'query' в названии для текущего пользователя.")
-    public List<Document> getDocumentsByQuery(@RequestParam(name = "query") String query, @AuthenticationPrincipal OAuth2User principal)
-    {
-        var user = User.fromPrincipal(principal);
-        return documentService.findByQuery(query, user);
-    }
-
-    @GetMapping(value = "/documents/tag", params = "tag")
-    @ApiOperation("Позволяет найти документы с тегом 'tag' для текущего пользователя.")
-    public List<Document> getDocumentsByTag(@RequestParam(name = "tag") String tag, @AuthenticationPrincipal OAuth2User principal)
-    {
-        var user = User.fromPrincipal(principal);
-        return documentService.findByTag(tag, user);
-    }
-
     @GetMapping(value = "/documents")
     @ApiOperation("Позволяет получить все документы для текущего пользователя.")
     public List<Document> getAllDocuments(@AuthenticationPrincipal OAuth2User principal)

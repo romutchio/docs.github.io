@@ -14,7 +14,6 @@ public class Document
     @ApiModelProperty(name = "Теги документа")
     private String[] tags;
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;

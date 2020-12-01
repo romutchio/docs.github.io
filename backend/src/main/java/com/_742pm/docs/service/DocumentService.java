@@ -81,11 +81,12 @@ public class DocumentService implements IDocumentService
     {
         var userTags = tagService.findAll(user);
         var tagList = Arrays.asList(tags);
-        if (!userTags.containsAll(tagList)){
+        if (!userTags.containsAll(tagList))
+        {
             return List.of();
         }
 
-        return findAll(user).stream().parallel().filter(document -> tagService.getTags(user, document).containsAll(tagList)).collect(Collectors.toList());
+        return findAll(user).stream().filter(document -> Arrays.asList(document.getTags()).containsAll(tagList)).collect(Collectors.toList());
     }
 
     @Override
