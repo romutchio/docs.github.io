@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @Api(value = "Контроллер для поиска документов")
@@ -26,7 +29,8 @@ public class DocumentsController
     Logger logger = LoggerFactory.getLogger(DocumentsController.class);
 
     @ExceptionHandler(Exception.class)
-    public ModelAndView handleError(HttpServletRequest req, Exception ex) {
+    public ModelAndView handleError(HttpServletRequest req, Exception ex)
+    {
         logger.error("Request: " + req.getRequestURL() + " raised " + ex);
 
         ModelAndView mav = new ModelAndView();
@@ -38,6 +42,22 @@ public class DocumentsController
 
     @Autowired
     private IDocumentService documentService;
+
+    @GetMapping(value = "/documents/search")
+    @ApiOperation("Позволяет найти документы, содержащие подстроку 'query' в названии для текущего пользователя или содержащие все перечисленные в 'tags' теги")
+    public List<Document> searchDocuments(@RequestParam(name = "query") String query, @RequestParam(name = "tags") String[] tags, @AuthenticationPrincipal OAuth2User principal)
+    {
+        var user = User.fromPrincipal(principal);
+
+        if (query == null && (tags == null || tags.length == 0))
+        {
+            return documentService.findAll(user);
+        }
+        var queryDocs = query != null ? documentService.findByQuery(query, user) : List.<Document>of();
+        var tagDocs = documentService.findByTags(tags, user);
+        queryDocs.addAll(tagDocs);
+        return queryDocs;
+    }
 
     @GetMapping(value = "/documents/query", params = "query")
     @ApiOperation("Позволяет найти документы, содержащие подстроку 'query' в названии для текущего пользователя.")

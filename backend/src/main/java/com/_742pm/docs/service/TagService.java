@@ -23,6 +23,12 @@ public class TagService implements ITagService{
     }
 
     @Override
+    public List<Tag> getTags(User user, Document document)
+    {
+        return findAll(user).stream().filter(tag -> document.getId().equals(tag.getDocumentId())).collect(Collectors.toList());
+    }
+
+    @Override
     public List<UUID> findDocumentsByTag(String tag, User user) {
         var tags = repository.findTagsByName(tag);
         return tags
