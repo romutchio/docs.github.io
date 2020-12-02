@@ -24,6 +24,10 @@ import java.util.UUID;
 public class DocumentController
 {
     Logger logger = LoggerFactory.getLogger(DocumentController.class);
+    @Autowired
+    private IDocumentService documentService;
+    @Autowired
+    private ITagService tagService;
 
     @ExceptionHandler(Exception.class)
     public ModelAndView handleError(HttpServletRequest req, Exception ex)
@@ -36,12 +40,6 @@ public class DocumentController
         mav.setViewName("error");
         return mav;
     }
-
-    @Autowired
-    private IDocumentService documentService;
-
-    @Autowired
-    private ITagService tagService;
 
     @GetMapping(value = "/document/{id}", produces = "application/json")
     @ApiOperation("Позволяет получить конкретный документ по его айди.")

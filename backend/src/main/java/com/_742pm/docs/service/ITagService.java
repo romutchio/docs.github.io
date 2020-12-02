@@ -9,9 +9,13 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public interface ITagService {
+public interface ITagService
+{
     List<Tag> findAll(User user);
+
     List<Tag> getTags(User user, Document document);
+
     List<UUID> findDocumentsByTag(String tag, User user);
+
     UUID create(Tag tag);
 }

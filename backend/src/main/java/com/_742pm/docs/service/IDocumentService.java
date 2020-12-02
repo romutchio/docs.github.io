@@ -9,14 +9,21 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public interface IDocumentService {
+public interface IDocumentService
+{
     Optional<Document> getById(UUID id);
+
     List<Document> findAll(User user);
+
     List<Document> findByQuery(String query, User user);
 
     List<Document> findByTag(String tag, User user);
+
     List<Document> findByTags(String[] tags, User user);
+
     Document create(Document document);
+
     void update(UUID documentId, Document document);
+
     void delete(UUID id);
 }

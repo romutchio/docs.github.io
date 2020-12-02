@@ -8,18 +8,19 @@ import org.springframework.web.filter.CommonsRequestLoggingFilter;
 @SpringBootApplication
 public class Application
 {
+    public static void main(String[] args)
+    {
+        SpringApplication.run(Application.class, args);
+    }
+
     @Bean
-    public CommonsRequestLoggingFilter requestLoggingFilter() {
+    public CommonsRequestLoggingFilter requestLoggingFilter()
+    {
         CommonsRequestLoggingFilter loggingFilter = new CommonsRequestLoggingFilter();
         loggingFilter.setIncludeClientInfo(true);
         loggingFilter.setIncludeQueryString(true);
         loggingFilter.setIncludePayload(true);
         loggingFilter.setMaxPayloadLength(64000);
         return loggingFilter;
-    }
-
-    public static void main(String[] args)
-    {
-        SpringApplication.run(Application.class, args);
     }
 }

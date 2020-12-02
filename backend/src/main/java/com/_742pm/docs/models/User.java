@@ -1,19 +1,42 @@
 package com._742pm.docs.models;
 
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import io.swagger.annotations.ApiModelProperty;
-
+import javax.persistence.*;
 import java.util.UUID;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User
+{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+    @ApiModelProperty(name = "Имя пользователя")
+    private String name;
+    @ApiModelProperty(name = "Ссылка на аватарку")
+    private String imageUrl;
+
+    public User()
+    {
+    }
+
+    public User(UUID id, String name, String imageUrl)
+    {
+        this.id = id;
+        this.name = name;
+        this.imageUrl = imageUrl;
+    }
+
+    public static User fromPrincipal(OAuth2User principal)
+    {
+        var id = UUID.nameUUIDFromBytes(principal.<String>getAttribute("sub").getBytes());
+        var name = principal.<String>getAttribute("name");
+        var picture = principal.<String>getAttribute("picture");
+        return new User(id, name, picture);
+    }
 
     @Override
     public String toString()
@@ -23,11 +46,6 @@ public class User {
                 ", name='" + name + '\'' +
                 ", image_url='" + imageUrl + '\'' +
                 '}';
-    }
-
-    public void setId(UUID id)
-    {
-        this.id = id;
     }
 
     public String getName()
@@ -50,34 +68,14 @@ public class User {
         this.imageUrl = imageUrl;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-
-    @ApiModelProperty(name = "Имя пользователя")
-    private String name;
-
-    @ApiModelProperty(name = "Ссылка на аватарку")
-    private String imageUrl;
-
-    public User() {
-    }
-
-    public User(UUID id, String name, String imageUrl) {
-        this.id = id;
-        this.name = name;
-        this.imageUrl = imageUrl;
-    }
-
-    public UUID getId() {
+    public UUID getId()
+    {
         return id;
     }
 
-    public static User fromPrincipal(OAuth2User principal) {
-        var id =  UUID.nameUUIDFromBytes(principal.<String>getAttribute("sub").getBytes());
-        var name =  principal.<String>getAttribute("name");
-        var picture =  principal.<String>getAttribute("picture");
-        return new User(id, name, picture);
+    public void setId(UUID id)
+    {
+        this.id = id;
     }
 
 }

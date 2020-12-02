@@ -4,7 +4,6 @@ import com._742pm.docs.models.Document;
 import com._742pm.docs.models.Tag;
 import com._742pm.docs.models.User;
 import com._742pm.docs.repository.DocumentRepository;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -12,13 +12,15 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class TagService implements ITagService{
+public class TagService implements ITagService
+{
 
     @Autowired
     private TagRepository repository;
 
     @Override
-    public List<Tag> findAll(User user) {
+    public List<Tag> findAll(User user)
+    {
         return repository.findTagsByUserId(user.getId());
     }
 
@@ -29,7 +31,8 @@ public class TagService implements ITagService{
     }
 
     @Override
-    public List<UUID> findDocumentsByTag(String tag, User user) {
+    public List<UUID> findDocumentsByTag(String tag, User user)
+    {
         var tags = repository.findTagsByName(tag);
         return tags
                 .stream()
@@ -39,7 +42,8 @@ public class TagService implements ITagService{
     }
 
     @Override
-    public UUID create(Tag tag) {
+    public UUID create(Tag tag)
+    {
         repository.save(tag);
         return tag.getId();
     }

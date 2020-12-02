@@ -7,7 +7,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "tags")
-public class Tag {
+public class Tag
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,26 +23,32 @@ public class Tag {
     @ApiModelProperty(name = "UUID пользователя")
     private UUID userId;
 
-    public Tag() {
+    public Tag()
+    {
     }
 
-    public Tag(UUID id, String name, UUID documentId, UUID userId) {
+    public Tag(UUID id, String name, UUID documentId, UUID userId)
+    {
         this.id = id;
         this.name = name;
         this.documentId = documentId;
         this.userId = userId;
     }
-    public Tag(String name, UUID documentId, UUID userId) {
+
+    public Tag(String name, UUID documentId, UUID userId)
+    {
         this.name = name;
         this.documentId = documentId;
         this.userId = userId;
     }
 
-    public UUID getDocumentId() {
+    public UUID getDocumentId()
+    {
         return documentId;
     }
 
-    public UUID getUserId() {
+    public UUID getUserId()
+    {
         return userId;
     }
 

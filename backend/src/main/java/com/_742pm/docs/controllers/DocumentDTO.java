@@ -2,33 +2,27 @@ package com._742pm.docs.controllers;
 
 import io.swagger.annotations.ApiModelProperty;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.UUID;
 
 @Entity
 public class DocumentDTO
 {
     private String[] tags;
-
-    public void setId(UUID id)
-    {
-        this.id = id;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-
     @ApiModelProperty(name = "Название документа")
     private String name;
-
     @ApiModelProperty(name = "UUID пользователя")
     private UUID userId;
-
     @ApiModelProperty(name = "Байтовое представление данных")
     private String data;
 
-    public DocumentDTO(String[] tags,String name, UUID userId, String data)
+    public DocumentDTO(String[] tags, String name, UUID userId, String data)
     {
         this.tags = tags;
         this.name = name;
@@ -40,7 +34,7 @@ public class DocumentDTO
     {
     }
 
-    public DocumentDTO(String[] tags,UUID id, String name, UUID userId, String data)
+    public DocumentDTO(String[] tags, UUID id, String name, UUID userId, String data)
     {
         this.tags = tags;
         this.id = id;
@@ -82,6 +76,11 @@ public class DocumentDTO
     public UUID getId()
     {
         return id;
+    }
+
+    public void setId(UUID id)
+    {
+        this.id = id;
     }
 
     public String[] getTags()

@@ -19,12 +19,16 @@ import java.util.List;
 
 @RestController
 @Api(value = "Контроллер для добавления и получения тегов")
-public class TagController {
+public class TagController
+{
 
     Logger logger = LoggerFactory.getLogger(TagController.class);
+    @Autowired
+    private ITagService tagService;
 
     @ExceptionHandler(Exception.class)
-    public ModelAndView handleError(HttpServletRequest req, Exception ex) {
+    public ModelAndView handleError(HttpServletRequest req, Exception ex)
+    {
         logger.error("Request: " + req.getRequestURL() + " raised " + ex);
 
         ModelAndView mav = new ModelAndView();
@@ -34,19 +38,18 @@ public class TagController {
         return mav;
     }
 
-    @Autowired
-    private ITagService tagService;
-
     @GetMapping(value = "/tags", produces = "application/json")
     @ApiOperation("Позволяет найти все теги, существующие у текущего пользователя.")
-    public List<Tag> getTags(@AuthenticationPrincipal OAuth2User principal ) {
+    public List<Tag> getTags(@AuthenticationPrincipal OAuth2User principal)
+    {
         var user = User.fromPrincipal(principal);
         return tagService.findAll(user);
     }
 
     @PostMapping(value = "/tags", consumes = "application/json")
     @ApiOperation("Позволяет добавить тег к документу для пользователя.")
-    public void addTag(@RequestBody Tag[] tags) {
+    public void addTag(@RequestBody Tag[] tags)
+    {
         Arrays.stream(tags).parallel().map(tag -> tagService.create(tag));
     }
 

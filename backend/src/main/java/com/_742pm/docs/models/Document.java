@@ -1,8 +1,6 @@
 package com._742pm.docs.models;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.ArrayUtils;
 
 import javax.persistence.*;
 import java.util.UUID;

@@ -28,6 +28,10 @@ import java.util.stream.Collectors;
 public class DocumentsController
 {
     Logger logger = LoggerFactory.getLogger(DocumentsController.class);
+    @Autowired
+    private IDocumentService documentService;
+    @Autowired
+    private ITagService tagService;
 
     @ExceptionHandler(Exception.class)
     public ModelAndView handleError(HttpServletRequest req, Exception ex)
@@ -48,11 +52,6 @@ public class DocumentsController
             return new DocumentDTO(ts, document.getId(), document.getName(), document.getUserId(), document.getData());
         }).collect(Collectors.toList());
     }
-
-    @Autowired
-    private IDocumentService documentService;
-    @Autowired
-    private ITagService tagService;
 
     @GetMapping(value = "/documents/search")
     @ApiOperation("Позволяет найти документы, содержащие подстроку 'query' в названии для текущего пользователя или содержащие все перечисленные в 'tags' теги")
