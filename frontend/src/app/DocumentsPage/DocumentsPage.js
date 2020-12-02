@@ -107,6 +107,7 @@ export default class DocumentsPage extends React.Component {
         const tags = this.chosenTags.map(t => encodeURIComponent(t)).join(",");
 
         const uri = `/documents?query=${query}&tags=${tags}`;
+        console.log('uri', uri);
         const response = await fetch(uri);
 
         if (response.status !== 200) {

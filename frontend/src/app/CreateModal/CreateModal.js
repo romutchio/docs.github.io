@@ -101,7 +101,7 @@ export default class CreateModal extends React.Component {
         this.setState({tags});
     }
 
-    save = () => {
+    save = async () => {
         if (!this.state.name || (!this.props.edit && !this.state.file)) {
             return;
         }
@@ -109,15 +109,26 @@ export default class CreateModal extends React.Component {
         const document = {
             name: this.state.name,
             tags: this.state.tags,
-            file: this.state.file
+            data: this.state.file
         };
 
-        this.sendDocument(document);
+        await this.sendDocument(document);
         this.props.onCreate();
     }
 
     sendDocument = async document => {
-        console.log(document)
+        const response = await fetch('/document', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(document)
+        });
+
+        if (response.status !== 200) {
+            console.error(response.status, response.statusText);
+        }
     }
 
     processFile = async file => {
