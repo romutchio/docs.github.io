@@ -12,5 +12,7 @@ public interface TagRepository extends CrudRepository<Tag, Long>
 {
     List<Tag> findTagsByUserId(UUID user_id);
 
-    List<Tag> findTagsByName(String name);
+    List<Tag> findTagsByDocumentId(UUID document_id);
+
+    List<Tag> findTagsByNameContains(String name);
 }

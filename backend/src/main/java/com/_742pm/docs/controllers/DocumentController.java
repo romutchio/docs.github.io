@@ -75,7 +75,7 @@ public class DocumentController
 
         var document = new Document(documentDTO.getName(), userId, documentDTO.getData());
         var documentId = document.getId();
-        //tagService.deleteTags(documentId, userId);
+        tagService.deleteDocumentTags(documentId);
         var tags = Arrays.stream(documentDTO.getTags()).parallel().map(tag ->
                 tagService.create(new Tag(tag, documentId, userId))
         ).toArray(UUID[]::new);
@@ -89,7 +89,7 @@ public class DocumentController
     public void deleteDocument(@PathVariable("id") UUID id)
     {
         documentService.delete(id);
-        //tagService.deleteTags(documentId, userId);
+        tagService.deleteDocumentTags(id);
     }
 
 }
