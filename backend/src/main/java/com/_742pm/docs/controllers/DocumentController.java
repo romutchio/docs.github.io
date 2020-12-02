@@ -43,9 +43,16 @@ public class DocumentController
 
     @GetMapping(value = "/document/{id}", produces = "application/json")
     @ApiOperation("Позволяет получить конкретный документ по его айди.")
-    public Document getDocument(@PathVariable("id") UUID id)
+    public DocumentDTO getDocument(@PathVariable("id") UUID id, @AuthenticationPrincipal OAuth2User principal)
     {
-        return documentService.getById(id).orElse(null);
+        var user = User.fromPrincipal(principal);
+
+        return documentService.getById(id).map(document -> {
+            String[] tags = tagService.getTags(user, document).stream().map(Tag::getName).toArray(String[]::new);
+            return new DocumentDTO(tags, document.getId(), document.getName(), document.getUserId(), document.getData());
+        }).orElse(null);
+
+
     }
 
     @PostMapping(value = "/document", consumes = "application/json")
