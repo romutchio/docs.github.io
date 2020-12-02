@@ -1,6 +1,7 @@
 package com._742pm.docs.service;
 
 import com._742pm.docs.models.Document;
+import com._742pm.docs.models.Tag;
 import com._742pm.docs.models.User;
 import com._742pm.docs.repository.DocumentRepository;
 import org.apache.logging.log4j.util.Strings;
@@ -79,14 +80,17 @@ public class DocumentService implements IDocumentService
     @Override
     public List<Document> findByTags(String[] tags, User user)
     {
-        var userTags = tagService.findAll(user);
+        var userTags = tagService.findAll(user).stream().map(Tag::getName).collect(Collectors.toList());
         var tagList = Arrays.asList(tags);
         if (!userTags.containsAll(tagList))
         {
             return List.of();
         }
 
-        return findAll(user).stream().filter(document -> tagService.getTags(user, document).containsAll(tagList)).collect(Collectors.toList());
+        return findAll(user)
+                .stream()
+                .filter(document -> tagService.getTags(user, document).containsAll(tagList))
+                .collect(Collectors.toList());
     }
 
     @Override
