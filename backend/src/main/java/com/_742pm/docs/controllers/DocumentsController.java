@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -65,6 +66,8 @@ public class DocumentsController
         }
         var queryDocs = query != null ? convertToDTOs(documentService.findByQuery(query, user), user) : List.<DocumentDTO>of();
         var tagDocs = convertToDTOs(documentService.findByTags(tags, user), user);
+        logger.info("Found documents by tag: " + Arrays.toString(tagDocs.toArray()));
+        logger.info("Found documents by query: " + Arrays.toString(queryDocs.toArray()));
         queryDocs.addAll(tagDocs);
         return queryDocs;
     }
