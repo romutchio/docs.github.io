@@ -1,23 +1,13 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS documents;
-DROP TABLE IF EXISTS tags;
-
-CREATE TABLE users(
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    name VARCHAR(255),
-    image_url VARCHAR(255)
-);
-
-CREATE TABLE documents(
+CREATE TABLE IF NOT EXISTS documents(
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     name VARCHAR(255),
     user_id UUID,
     data text
 );
 
-CREATE TABLE tags(
+CREATE TABLE IF NOT EXISTS tags(
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     name VARCHAR(255),
     document_id UUID,
