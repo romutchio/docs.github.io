@@ -89,6 +89,7 @@ public class DocumentController
     public void deleteDocument(@PathVariable("id") UUID id)
     {
         documentService.delete(id);
+        //tagService.deleteTags(documentId, userId);
     }
 
 }
