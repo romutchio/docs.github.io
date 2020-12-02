@@ -7,6 +7,7 @@ import com._742pm.docs.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -33,6 +34,7 @@ public class TagService implements ITagService
     @Override
     public List<UUID> findDocumentsByTag(String tag, User user)
     {
+
         var tags = repository.findTagsByName(tag);
         return tags
                 .stream()

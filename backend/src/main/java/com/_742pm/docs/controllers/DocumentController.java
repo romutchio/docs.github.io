@@ -73,7 +73,7 @@ public class DocumentController
 
         var userId = user.getId();
 
-        var document = new Document(documentDTO.getName(), userId, documentDTO.getData());
+        var document = new Document(documentDTO.getId(), documentDTO.getName(), userId, documentDTO.getData());
         var documentId = document.getId();
         //tagService.deleteTags(documentId, userId);
         var tags = Arrays.stream(documentDTO.getTags()).parallel().map(tag ->
