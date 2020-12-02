@@ -14,9 +14,9 @@ export default class CreateModal extends React.Component {
 
         this.ref = React.createRef();
         this.state = {
-            name: props.name,
-            filename: props.name ? `Файл - ${props.name}` : null,
-            tags: props.tags ?? []
+            name: props.document.name,
+            filename: props.document.name ? `Файл - ${props.name}` : null,
+            tags: props.document.tags ?? []
         }
     }
 
@@ -112,13 +112,34 @@ export default class CreateModal extends React.Component {
             data: this.state.file
         };
 
-        await this.sendDocument(document);
+        if (this.props.edit) {
+            document.id = this.props.document.id;
+            await this.updateDocument(document);
+        } else {
+            await this.sendDocument(document);
+        }
+
         this.props.onCreate();
     }
 
     sendDocument = async document => {
         const response = await fetch('/document', {
             method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(document)
+        });
+
+        if (response.status !== 200) {
+            console.error(response.status, response.statusText);
+        }
+    }
+
+    updateDocument = async document => {
+        const response = await fetch('/document', {
+            method: 'PUT',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'

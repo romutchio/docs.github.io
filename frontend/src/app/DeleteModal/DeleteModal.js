@@ -22,7 +22,11 @@ export default class DeleteModal extends React.Component {
     }
 
     sendDeleteRequest = async () => {
-        console.log(`deleted id ${this.props.document.id}`)
+        const response = await fetch(`/documents/${this.props.document.id}`, {method: 'DELETE'});
+
+        if (response.status !== 200) {
+            console.error(response.status, response.statusText);
+        }
     }
 
     cancel = () => {
