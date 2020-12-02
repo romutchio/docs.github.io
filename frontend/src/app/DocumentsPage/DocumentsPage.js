@@ -59,7 +59,7 @@ export default class DocumentsPage extends React.Component {
                             tags={this.state.currentDocument.tags}
                             enableChangeFile={this.props.password}
                             edit={true}
-                            onCreate={this.closeEditModal}
+                            onCreate={this.createDocument}
                         />
                     </Modal>
                 }
@@ -156,6 +156,11 @@ export default class DocumentsPage extends React.Component {
             documentModalShown: false,
             deleteModalShown: true
         });
+    }
+
+    createDocument = async () => {
+        this.closeEditModal();
+        await this.updateDocuments();
     }
 
     closeDocumentModal = () => {

@@ -32,6 +32,6 @@ export default class TextInput extends React.Component {
     }
 
     onChange = e => {
-        this.props.onChange(e.target.value);
+        this.props.onEdit && this.props.onEdit(e.target.value);
     }
 }
