@@ -25,7 +25,7 @@ export default class Account extends React.Component {
     }
 
     async componentDidMount() {
-        const response = await fetch('/me');
+        const response = await fetch('/user');
 
         if (response.status !== 200) {
             console.error(response.status, response.statusText);
@@ -33,7 +33,7 @@ export default class Account extends React.Component {
         }
 
         const user = await response.json();
-        this.setState({name: user.name, avatar: user.picture});
+        this.setState({name: user.name, avatar: user.imageUrl});
     }
 }
 
