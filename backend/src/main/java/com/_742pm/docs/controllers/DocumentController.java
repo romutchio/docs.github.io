@@ -1,8 +1,10 @@
 package com._742pm.docs.controllers;
 
 import com._742pm.docs.models.Document;
+import com._742pm.docs.models.Tag;
 import com._742pm.docs.models.User;
 import com._742pm.docs.service.IDocumentService;
+import com._742pm.docs.service.ITagService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.UUID;
 
 @RestController
@@ -23,7 +26,8 @@ public class DocumentController
     Logger logger = LoggerFactory.getLogger(DocumentController.class);
 
     @ExceptionHandler(Exception.class)
-    public ModelAndView handleError(HttpServletRequest req, Exception ex) {
+    public ModelAndView handleError(HttpServletRequest req, Exception ex)
+    {
         logger.error("Request: " + req.getRequestURL() + " raised " + ex);
 
         ModelAndView mav = new ModelAndView();
@@ -36,6 +40,9 @@ public class DocumentController
     @Autowired
     private IDocumentService documentService;
 
+    @Autowired
+    private ITagService tagService;
+
     @GetMapping(value = "/document/{id}", produces = "application/json")
     @ApiOperation("Позволяет получить конкретный документ по его айди.")
     public Document getDocument(@PathVariable("id") UUID id)
@@ -44,21 +51,38 @@ public class DocumentController
     }
 
     @PostMapping(value = "/document", consumes = "application/json")
-    public UUID postDocument(@RequestBody Document document, @AuthenticationPrincipal OAuth2User principal)
+    @ApiOperation("Позволяет создать документ. Возвращает айди созданного документа. Принимает список тегов, данные и имя документа.")
+    public UUID postDocument(@RequestBody DocumentDTO documentDTO, @AuthenticationPrincipal OAuth2User principal)
     {
         var user = User.fromPrincipal(principal);
-        logger.info("Got request from" + principal.<String>getAttribute("name"));
+        logger.info("Got request from" + user.getName());
 
-        document.setUserId(user.getId());
-        return documentService.create(document).getId();
+        var userId = user.getId();
+        var document = new Document(documentDTO.getName(), userId, documentDTO.getData());
+        var createdDocumentId = documentService.create(document).getId();
+        var tags = Arrays.stream(documentDTO.getTags()).parallel().map(tag -> tagService.create(new Tag(tag, createdDocumentId, userId))).toArray(UUID[]::new);
+        logger.info("Created " + tags.length + " of tags for user " + user.getName() + " and document " + createdDocumentId + ": " + Arrays.toString(tags));
+        return createdDocumentId;
 
     }
 
-    @PutMapping(value = "/document/{id}", consumes = "application/json")
-    @ApiOperation("Позволяет обновить конкретный документ по его айди.")
-    public void updateDocument(@RequestBody Document document, @PathVariable("id") UUID id)
+    @PutMapping(value = "/document", consumes = "application/json")
+    @ApiOperation("Позволяет обновить конкретный документ. В теле запроса обязательно должно быть поле id для айди документа. userId можно не проставлять.")
+    public void updateDocument(@RequestBody DocumentDTO documentDTO, @AuthenticationPrincipal OAuth2User principal)
     {
-        documentService.update(id, document);
+        var user = User.fromPrincipal(principal);
+        logger.info("Got request from" + user.getName());
+
+        var userId = user.getId();
+
+        var document = new Document(documentDTO.getName(), userId, documentDTO.getData());
+        var documentId = document.getId();
+
+        var tags = Arrays.stream(documentDTO.getTags()).parallel().map(tag ->
+                tagService.create(new Tag(tag, documentId, userId))
+        ).toArray(UUID[]::new);
+        logger.info("Created " + tags.length + " of tags for user " + user.getName() + " and document " + documentId + ": " + Arrays.toString(tags));
+        documentService.update(documentId, document);
     }
 
     @DeleteMapping("/documents/{id}")

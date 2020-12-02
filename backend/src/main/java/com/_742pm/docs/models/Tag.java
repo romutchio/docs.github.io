@@ -31,6 +31,11 @@ public class Tag {
         this.documentId = documentId;
         this.userId = userId;
     }
+    public Tag(String name, UUID documentId, UUID userId) {
+        this.name = name;
+        this.documentId = documentId;
+        this.userId = userId;
+    }
 
     public UUID getDocumentId() {
         return documentId;
