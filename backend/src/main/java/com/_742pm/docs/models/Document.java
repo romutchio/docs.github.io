@@ -9,6 +9,32 @@ import java.util.UUID;
 @Table(name = "documents")
 public class Document
 {
+    @Override
+    public String toString()
+    {
+        return "Document{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", userId=" + userId +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Document document = (Document) o;
+
+        return getId() != null ? getId().equals(document.getId()) : document.getId() == null;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return getId() != null ? getId().hashCode() : 0;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

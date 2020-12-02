@@ -6,11 +6,40 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Arrays;
 import java.util.UUID;
 
 @Entity
 public class DocumentDTO
 {
+    @Override
+    public String toString()
+    {
+        return "DocumentDTO{" +
+                "tags=" + Arrays.toString(tags) +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", userId=" + userId +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DocumentDTO that = (DocumentDTO) o;
+
+        return getId() != null ? getId().equals(that.getId()) : that.getId() == null;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return getId() != null ? getId().hashCode() : 0;
+    }
+
     private String[] tags;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
