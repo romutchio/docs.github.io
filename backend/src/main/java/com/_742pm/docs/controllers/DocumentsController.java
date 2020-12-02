@@ -21,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -56,26 +55,26 @@ public class DocumentsController
 
     @GetMapping(value = "/documents/search")
     @ApiOperation("Позволяет найти документы, содержащие подстроку 'query' в названии для текущего пользователя или содержащие все перечисленные в 'tags' теги")
-    public List<DocumentDTO> searchDocuments(@RequestParam(name = "query") Optional<String> query, @RequestParam(name = "tags") Optional<String[]> tags, @AuthenticationPrincipal OAuth2User principal)
+    public List<DocumentDTO> searchDocuments(@RequestParam(name = "query", required = false) String query, @RequestParam(name = "tags", required = false) String[] tags, @AuthenticationPrincipal OAuth2User principal)
     {
         var user = User.fromPrincipal(principal);
 
-        if (query.isEmpty() && tags.isEmpty())
+        if (query == null && tags == null)
         {
             return convertToDTOs(documentService.findAll(user), user);
         }
-        if (query.isEmpty())
+        if (query == null)
         {
 
-            return convertToDTOs(documentService.findByTags(tags.get(), user), user);
+            return convertToDTOs(documentService.findByTags(tags, user), user);
         }
-        if (tags.isEmpty())
+        if (tags == null)
         {
-            return convertToDTOs(documentService.findByQuery(query.get(), user), user);
+            return convertToDTOs(documentService.findByQuery(query, user), user);
         }
 
-        var queryDocs = convertToDTOs(documentService.findByQuery(query.get(), user), user);
-        var tagDocs = convertToDTOs(documentService.findByTags(tags.get(), user), user);
+        var queryDocs = convertToDTOs(documentService.findByQuery(query, user), user);
+        var tagDocs = convertToDTOs(documentService.findByTags(tags, user), user);
         logger.info("Found documents by tag: " + Arrays.toString(tagDocs.toArray()));
         logger.info("Found documents by query: " + Arrays.toString(queryDocs.toArray()));
         return queryDocs.stream().filter(tagDocs::contains).collect(Collectors.toList());
