@@ -9,6 +9,12 @@ import java.util.UUID;
 public class DocumentDTO
 {
     private String[] tags;
+
+    public void setId(UUID id)
+    {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
