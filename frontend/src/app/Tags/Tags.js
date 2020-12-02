@@ -8,18 +8,7 @@ export default class Tags extends React.Component {
         super(props);
 
         this.state = {
-            tags: [
-                {id: 1, name: 'тэг'},
-                {id: 2, name: 'паспорт'},
-                {id: 3, name: 'документ'},
-                {id: 4, name: 'два слова'},
-                {id: 5, name: 'ну'},
-                {id: 6, name: 'прям'},
-                {id: 7, name: 'жесть'},
-                {id: 8, name: 'как'},
-                {id: 9, name: 'много'},
-                {id: 10, name: 'тэгов'},
-            ]
+            tags: []
         }
     }
 
@@ -29,7 +18,7 @@ export default class Tags extends React.Component {
             <div className='tags'>
                 {
                     this.state.tags.map(t => (
-                        <Tag key={t.id} tagId={t.id} onClick={this.onTagClick}>
+                        <Tag key={t.id} onClick={this.onTagClick}>
                             {t.name}
                         </Tag>
                     ))
@@ -38,11 +27,21 @@ export default class Tags extends React.Component {
         );
     }
 
-    onTagClick = tagId => {
-        
+    onTagClick = tag => {
+        this.props.onTagClick(tag);
     }
 
-    componentDidMount() {
-        // get tags from backend
+    async componentDidMount() {
+        const response = await fetch('/tags');
+
+        if (response.status !== 200) {
+            console.error(response.status, response.statusText);
+            return;
+        }
+
+        const tags = await response.json();
+        console.log('tags', tags);
+
+        this.setState({tags});
     }
 }

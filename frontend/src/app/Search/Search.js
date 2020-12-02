@@ -3,8 +3,8 @@ import './Search.css';
 
 import TextInput from "../TextInput/TextInput";
 
-export default function Search() {
+export default function Search({onEdit}) {
     return (
-        <TextInput placeholder={'Поиск'} className='search'/>
+        <TextInput placeholder={'Поиск'} className='search' onChange={onEdit}/>
     );
 }

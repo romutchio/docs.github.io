@@ -19,6 +19,7 @@ export default class TextInput extends React.Component {
                 ref={this.ref}
                 defaultValue={children}
                 onKeyPress={this.onEnter}
+                onChange={this.onChange}
                 {...props}
             />
         );
@@ -28,5 +29,9 @@ export default class TextInput extends React.Component {
         if (e.key === 'Enter') {
             this.ref.current.blur()
         }
+    }
+
+    onChange = e => {
+        this.props.onChange(e.target.value);
     }
 }

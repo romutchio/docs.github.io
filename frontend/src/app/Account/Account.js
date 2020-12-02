@@ -33,6 +33,8 @@ export default class Account extends React.Component {
         }
 
         const user = await response.json();
+
+        console.log('user', user);
         this.setState({name: user.name, avatar: user.imageUrl});
     }
 }

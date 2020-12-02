@@ -18,6 +18,8 @@ export default class DocumentsPage extends React.Component {
     constructor(props) {
         super(props);
 
+        this.searchQuery = '';
+        this.chosenTags = [];
         this.state = {
             documentModalShown: false,
             editModalShown: false,
@@ -27,22 +29,15 @@ export default class DocumentsPage extends React.Component {
         }
     }
 
-    componentDidMount() {
-        const documents = []
-
-        for (let i = 0; i < 20; i++) {
-            documents.push({id: i, name: `документ #${i + 1}`});
-        }
-        documents.push({id: 20, name: 'very long document name with spaces'})
-
-        this.setState({documents});
+    async componentDidMount() {
+        await this.updateDocuments();
     }
 
     render() {
         return (
             <>
-                <Search/>
-                <Tags/>
+                <Search onEdit={this.editSearch}/>
+                <Tags onTagClick={this.editChosenTags}/>
                 <Documents documents={this.state.documents} onChose={this.choseDocument}/>
                 {
                     this.state.documentModalShown &&
@@ -94,12 +89,49 @@ export default class DocumentsPage extends React.Component {
     }
 
     getDocument = async document => {
-        return {
-            id: document.id,
-            name: document.name,
-            tags: ["123", "456", "tag"],
-            file: "data:text/plain;base64,U2FsdGVkX1/wadRcd3Ir/4ljZ0iPqo5aciFqySd+CYs="
+        const response = await fetch(`/document/${document.id}`);
+
+        if (response.status !== 200) {
+            console.error(response.status, response.statusText);
+            return;
         }
+
+        const doc = await response.json();
+        console.log('document', doc);
+
+        return {...doc, file: doc.data};
+    }
+
+    updateDocuments = async () => {
+        const query = encodeURIComponent(this.searchQuery);
+        const tags = this.chosenTags.map(t => encodeURIComponent(t)).join(",");
+
+        const uri = `/documents?query=${query}&tags=${tags}`;
+        const response = await fetch(uri);
+
+        if (response.status !== 200) {
+            console.error(response.status, response.statusText);
+            return;
+        }
+
+        const documents = await response.json();
+        console.log('documents', documents);
+
+        this.setState({documents});
+    }
+
+    editSearch = async query => {
+        this.searchQuery = query;
+        await this.updateDocuments();
+    }
+
+    editChosenTags = async tag => {
+        if (this.chosenTags.includes(tag)) {
+            this.chosenTags = this.chosenTags.filter(t => t !== tag);
+        } else {
+            this.chosenTags.push(tag);
+        }
+        await this.updateDocuments();
     }
 
     choseDocument = async document => {

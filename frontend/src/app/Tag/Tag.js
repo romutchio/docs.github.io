@@ -1,5 +1,6 @@
 import React from "react";
 import './Tag.css';
+
 import Button from "../Button/Button";
 
 export default class Tag extends React.Component {
@@ -21,7 +22,7 @@ export default class Tag extends React.Component {
     }
 
     onClick = () => {
-        this.props.onClick(this.props.tagId);
+        this.props.onClick(this.props.children);
         this.setState({chosen: !this.state.chosen});
     }
 }
