@@ -79,20 +79,7 @@ public class DocumentService implements IDocumentService
     @Override
     public List<Document> findByTags(String[] tags, User user)
     {
-        var docLists = Arrays.stream(tags).flatMap(x -> findByTag(x, user).stream()).distinct().collect(Collectors.toList());
-
-        var userTags = tagService.findAll(user).stream().map(Tag::getName).collect(Collectors.toList());
-        var tagList = Arrays.asList(tags);
-        if (!userTags.containsAll(tagList))
-        {
-            return List.of();
-        }
-        //TODO:
-
-        return findAll(user)
-                .stream()
-                .filter(document -> tagService.getTags(user, document).containsAll(tagList))
-                .collect(Collectors.toList());
+        return Arrays.stream(tags).flatMap(x -> findByTag(x, user).stream()).distinct().collect(Collectors.toList());
     }
 
     @Override

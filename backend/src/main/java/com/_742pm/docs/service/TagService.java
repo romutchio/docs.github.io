@@ -34,8 +34,7 @@ public class TagService implements ITagService
     @Override
     public List<UUID> findDocumentsByTag(String tag, User user)
     {
-
-        var tags = repository.findTagsByName(tag);
+        var tags = repository.findTagsByNameContains(tag);
         return tags
                 .stream()
                 .filter(x -> x.getUserId().equals(user.getId()))
@@ -48,5 +47,18 @@ public class TagService implements ITagService
     {
         repository.save(tag);
         return tag.getId();
+    }
+
+    @Override
+    public void deleteDocumentTags(UUID documentId)
+    {
+        var tags = repository.findTagsByDocumentId(documentId);
+        repository.deleteAll(tags);
+    }
+
+    @Override
+    public void delete(Tag tag)
+    {
+        repository.delete(tag);
     }
 }

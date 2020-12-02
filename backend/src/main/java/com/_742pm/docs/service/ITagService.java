@@ -18,4 +18,6 @@ public interface ITagService
     List<UUID> findDocumentsByTag(String tag, User user);
 
     UUID create(Tag tag);
+    void deleteDocumentTags(UUID document_id);
+    void delete(Tag tag);
 }
