@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -55,20 +56,29 @@ public class DocumentsController
 
     @GetMapping(value = "/documents/search")
     @ApiOperation("Позволяет найти документы, содержащие подстроку 'query' в названии для текущего пользователя или содержащие все перечисленные в 'tags' теги")
-    public List<DocumentDTO> searchDocuments(@RequestParam(name = "query") String query, @RequestParam(name = "tags") String[] tags, @AuthenticationPrincipal OAuth2User principal)
+    public List<DocumentDTO> searchDocuments(@RequestParam(name = "query") Optional<String> query, @RequestParam(name = "tags") Optional<String[]> tags, @AuthenticationPrincipal OAuth2User principal)
     {
         var user = User.fromPrincipal(principal);
 
-        if (query == null && (tags == null || tags.length == 0))
+        if (query.isEmpty() && tags.isEmpty())
         {
             return convertToDTOs(documentService.findAll(user), user);
         }
-        var queryDocs = query != null ? convertToDTOs(documentService.findByQuery(query, user), user) : List.<DocumentDTO>of();
-        var tagDocs = convertToDTOs(documentService.findByTags(tags, user), user);
+        if (query.isEmpty())
+        {
+
+            return convertToDTOs(documentService.findByTags(tags.get(), user), user);
+        }
+        if (tags.isEmpty())
+        {
+            return convertToDTOs(documentService.findByQuery(query.get(), user), user);
+        }
+
+        var queryDocs = convertToDTOs(documentService.findByQuery(query.get(), user), user);
+        var tagDocs = convertToDTOs(documentService.findByTags(tags.get(), user), user);
         logger.info("Found documents by tag: " + Arrays.toString(tagDocs.toArray()));
         logger.info("Found documents by query: " + Arrays.toString(queryDocs.toArray()));
-        queryDocs.addAll(tagDocs);
-        return queryDocs;
+        return queryDocs.stream().filter(tagDocs::contains).collect(Collectors.toList());
     }
 
     @GetMapping(value = "/documents")
