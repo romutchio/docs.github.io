@@ -25,19 +25,21 @@ export default class DocumentsPage extends React.Component {
             editModalShown: false,
             deleteModalShown: false,
             currentDocument: {},
-            documents: []
+            documents: [],
+            tags: []
         }
     }
 
     async componentDidMount() {
         await this.updateDocuments();
+        await this.updateTags();
     }
 
     render() {
         return (
             <>
                 <Search onEdit={this.editSearch}/>
-                <Tags onTagClick={this.editChosenTags}/>
+                <Tags tags={this.state.tags} onTagClick={this.editChosenTags}/>
                 <Documents documents={this.state.documents} onChose={this.choseDocument}/>
                 {
                     this.state.documentModalShown &&
@@ -72,18 +74,25 @@ export default class DocumentsPage extends React.Component {
                         />
                     </Modal>
                 }
+                {
+                    this.props.createModalShown &&
+                    <Modal onClose={this.props.onCreateModalClose}>
+                        <CreateModal password={this.props.password} onCreate={this.closeCreateModal}/>
+                    </Modal>
+                }
             </>
         );
     }
 
     downloadDocument = () => {
         const name = this.state.currentDocument.name;
-        const [, type, , encoded] = this.state.currentDocument.file.match(/data:(.*?);(.*?),(.*)/);
+        let [, type, , encoded] = this.state.currentDocument.file.match(/data:(.*?);(.*?),(.*)/);
+        type += ';charset=utf-8';
 
         const decoded = CryptoJS.AES.decrypt(encoded, this.props.password).toString(CryptoJS.enc.Utf8);
-        const blob = new Blob([decoded], {type});
+        const file = new File([decoded], `${name}.${MimeTypes.extension(type)}`, {type});
 
-        FileSaver.saveAs(blob, `${name}.${MimeTypes.extension(type)}`)
+        FileSaver.saveAs(file);
         this.closeDocumentModal();
     }
 
@@ -102,11 +111,23 @@ export default class DocumentsPage extends React.Component {
     }
 
     updateDocuments = async () => {
-        const query = encodeURIComponent(this.searchQuery);
-        const tags = this.chosenTags.map(t => encodeURIComponent(t)).join(",");
+        let uri = '/documents/search'
+        const params = [];
 
-        const uri = `/documents?query=${query}&tags=${tags}`;
+        if (this.searchQuery) {
+            const query = encodeURIComponent(this.searchQuery);
+            params.push(`query=${query}`);
+        }
+        if (this.chosenTags?.length > 0) {
+            const tags = this.chosenTags.map(t => encodeURIComponent(t)).join(",");
+            params.push(`tags=${tags}`);
+        }
+
+        if (params.length > 0) {
+            uri += `?${params.join('&')}`;
+        }
         console.log('uri', uri);
+
         const response = await fetch(uri);
 
         if (response.status !== 200) {
@@ -118,6 +139,20 @@ export default class DocumentsPage extends React.Component {
         console.log('documents', documents);
 
         this.setState({documents});
+    }
+
+    updateTags = async () => {
+        const response = await fetch('/tags');
+
+        if (response.status !== 200) {
+            console.error(response.status, response.statusText);
+            return;
+        }
+
+        const tags = await response.json();
+        console.log('tags', tags);
+
+        this.setState({tags});
     }
 
     editSearch = async query => {
@@ -160,6 +195,7 @@ export default class DocumentsPage extends React.Component {
     createDocument = async () => {
         this.closeEditModal();
         await this.updateDocuments();
+        await this.updateTags();
     }
 
     closeDocumentModal = () => {
@@ -172,5 +208,12 @@ export default class DocumentsPage extends React.Component {
 
     closeDeleteModal = () => {
         this.setState({deleteModalShown: false});
+    }
+
+    closeCreateModal = async () => {
+        this.props.onCreateModalClose();
+
+        await this.updateDocuments();
+        await this.updateTags();
     }
 }

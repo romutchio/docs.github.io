@@ -20,19 +20,17 @@ export default class Page extends React.Component {
     render() {
         return (
             <article className='app-page' ref={this.ref}>
-                <DocumentsPage password={this.props.password}/>
+                <DocumentsPage
+                    password={this.props.password}
+                    createModalShown={this.state.modalShown}
+                    onCreateModalClose={this.closeModal}
+                />
                 <FixedButtons
                     enableAddButton={this.props.password}
                     onUpClick={this.scrollUp}
                     onAddClick={this.createDocument}
                 />
                 <Footer/>
-                {
-                    this.state.modalShown &&
-                    <Modal onClose={this.closeModal}>
-                        <CreateModal password={this.props.password} onCreate={this.closeModal}/>
-                    </Modal>
-                }
             </article>
         );
     }

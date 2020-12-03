@@ -14,9 +14,9 @@ export default class CreateModal extends React.Component {
 
         this.ref = React.createRef();
         this.state = {
-            name: props.document.name,
-            filename: props.document.name ? `Файл - ${props.name}` : null,
-            tags: props.document.tags ?? []
+            name: props.document?.name,
+            filename: props.document?.name ? `Файл - ${props.name}` : null,
+            tags: props.document?.tags ?? []
         }
     }
 
@@ -78,10 +78,12 @@ export default class CreateModal extends React.Component {
             return;
         }
 
-        const file = e.target.files[0];
-        this.setState({filename: file?.name});
+        const file = e.target?.files?.[0];
 
-        await this.processFile(file);
+        if (file) {
+            this.setState({filename: file?.name});
+            await this.processFile(file);
+        }
     }
 
     addTag = e => {

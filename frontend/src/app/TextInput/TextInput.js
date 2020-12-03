@@ -10,7 +10,7 @@ export default class TextInput extends React.Component {
     }
 
     render() {
-        let {placeholder, className = '', inputRef, hideLetters = false, children, ...props} = this.props;
+        let {placeholder, onEdit, className = '', inputRef, hideLetters = false, children, ...props} = this.props;
         return (
             <input
                 type={hideLetters ? 'password' : 'text'}
