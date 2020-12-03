@@ -152,6 +152,7 @@ export default class DocumentsPage extends React.Component {
         }
 
         const documents = await response.json();
+        documents.sort((a, b) => a.name > b.name ? 1 : -1)
         console.log('documents', documents);
 
         this.setState({documents});
