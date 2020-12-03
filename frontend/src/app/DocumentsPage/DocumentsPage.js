@@ -70,7 +70,7 @@ export default class DocumentsPage extends React.Component {
                     <Modal onClose={this.closeDeleteModal}>
                         <DeleteModal
                             document={this.state.currentDocument}
-                            onDelete={this.closeDeleteModal}
+                            onDelete={this.deleteDocumentForever}
                             onCancel={this.closeDeleteModal}
                         />
                     </Modal>
@@ -207,17 +207,22 @@ export default class DocumentsPage extends React.Component {
         });
     }
 
-    deleteDocument = async () => {
+    deleteDocument = () => {
         this.setState({
             documentModalShown: false,
             deleteModalShown: true
         });
-        await this.updateDocuments();
-        await this.updateTags();
     }
 
     createDocument = async () => {
         this.closeEditModal();
+        await this.updateDocuments();
+        await this.updateTags();
+    }
+
+    deleteDocumentForever = async () => {
+        this.setState({deleteModalShown: false});
+
         await this.updateDocuments();
         await this.updateTags();
     }
