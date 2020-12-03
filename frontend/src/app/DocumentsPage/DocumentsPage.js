@@ -86,12 +86,13 @@ export default class DocumentsPage extends React.Component {
 
     downloadDocument = () => {
         const name = this.state.currentDocument.name;
-        const [, type, , encoded] = this.state.currentDocument.file.match(/data:(.*?);(.*?),(.*)/);
+        let [, type, , encoded] = this.state.currentDocument.file.match(/data:(.*?);(.*?),(.*)/);
+        type += ';charset=utf-8';
 
         const decoded = CryptoJS.AES.decrypt(encoded, this.props.password).toString(CryptoJS.enc.Utf8);
-        const blob = new Blob([decoded], {type});
+        const file = new File([decoded], `${name}.${MimeTypes.extension(type)}`, {type});
 
-        FileSaver.saveAs(blob, `${name}.${MimeTypes.extension(type)}`)
+        FileSaver.saveAs(file);
         this.closeDocumentModal();
     }
 
