@@ -102,11 +102,23 @@ export default class DocumentsPage extends React.Component {
     }
 
     updateDocuments = async () => {
-        const query = encodeURIComponent(this.searchQuery);
-        const tags = this.chosenTags.map(t => encodeURIComponent(t)).join(",");
+        let uri = '/documents/search'
+        const params = [];
 
-        const uri = `/documents/search?query=${query}&tags=${tags}`;
+        if (this.searchQuery) {
+            const query = encodeURIComponent(this.searchQuery);
+            params.push(`query=${query}`);
+        }
+        if (this.chosenTags?.length > 0) {
+            const tags = this.chosenTags.map(t => encodeURIComponent(t)).join(",");
+            params.push(`tags=${tags}`);
+        }
+
+        if (params.length > 0) {
+            uri += `?${params.join('&')}`;
+        }
         console.log('uri', uri);
+
         const response = await fetch(uri);
 
         if (response.status !== 200) {
