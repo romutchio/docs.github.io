@@ -74,6 +74,12 @@ export default class DocumentsPage extends React.Component {
                         />
                     </Modal>
                 }
+                {
+                    this.props.createModalShown &&
+                    <Modal onClose={this.props.onCreateModalClose}>
+                        <CreateModal password={this.props.password} onCreate={this.closeCreateModal}/>
+                    </Modal>
+                }
             </>
         );
     }
@@ -201,5 +207,12 @@ export default class DocumentsPage extends React.Component {
 
     closeDeleteModal = () => {
         this.setState({deleteModalShown: false});
+    }
+
+    closeCreateModal = async () => {
+        this.props.onCreateModalClose();
+
+        await this.updateDocuments();
+        await this.updateTags();
     }
 }
