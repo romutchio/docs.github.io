@@ -5,7 +5,7 @@ import TextInput from "../TextInput/TextInput";
 import Button from "../Button/Button";
 
 import fileIcon from "../../images/attach_file-white-48dp.svg"
-import AES from 'crypto-js/aes'
+import * as CryptoJS from 'crypto-js'
 
 export default class CreateModal extends React.Component {
 
@@ -155,29 +155,12 @@ export default class CreateModal extends React.Component {
     }
 
     processFile = async file => {
-        // const text = await file?.text();
-        
-        const bytes = await this.readFileDataAsBase64(file);
-        const encrypted = AES.encrypt(bytes, this.props.password);
+        const content = await file?.arrayBuffer();
+        const bytes = CryptoJS.lib.WordArray.create(content);
+        const encrypted = CryptoJS.AES.encrypt(bytes, this.props.password);
 
         const result = `data:${file.type};base64,${encrypted.toString()}`;
 
         this.setState({file: result})
-    }
-
-    readFileDataAsBase64 = (file) => {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-
-            reader.onload = (event) => {
-                resolve(event.target.result);
-            };
-
-            reader.onerror = (err) => {
-                reject(err);
-            };
-
-            reader.readAsBinaryString(file);
-        });
     }
 }
