@@ -15,7 +15,7 @@ export default class CreateModal extends React.Component {
         this.ref = React.createRef();
         this.state = {
             name: props.document?.name,
-            filename: props.document?.name ? `Файл - ${props.name}` : null,
+            filename: props.document?.name ? `Файл - ${props.document.name}` : null,
             tags: props.document?.tags ?? []
         }
     }
