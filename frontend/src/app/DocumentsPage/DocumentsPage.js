@@ -207,11 +207,13 @@ export default class DocumentsPage extends React.Component {
         });
     }
 
-    deleteDocument = () => {
+    deleteDocument = async () => {
         this.setState({
             documentModalShown: false,
             deleteModalShown: true
         });
+        await this.updateDocuments();
+        await this.updateTags();
     }
 
     createDocument = async () => {
