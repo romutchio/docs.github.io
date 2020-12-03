@@ -61,18 +61,26 @@ public class DocumentsController
 
         if (query == null && tags == null)
         {
-            return convertToDTOs(documentService.findAll(user), user);
+            logger.info("Got no tags either query");
+            List<DocumentDTO> documentDTOS = convertToDTOs(documentService.findAll(user), user);
+            logger.info("Found documents: " + Arrays.toString(documentDTOS.toArray()));
+            return documentDTOS;
         }
         if (query == null)
         {
-
-            return convertToDTOs(documentService.findByTags(tags, user), user);
+            logger.info("Got no query so searching by tags: " + Arrays.toString(tags));
+            List<DocumentDTO> documentDTOS = convertToDTOs(documentService.findByTags(tags, user), user);
+            logger.info("Found documents: " + Arrays.toString(documentDTOS.toArray()));
+            return documentDTOS;
         }
         if (tags == null)
         {
-            return convertToDTOs(documentService.findByQuery(query, user), user);
+            logger.info("Got no tags so searching by query: " + query);
+            List<DocumentDTO> documentDTOS = convertToDTOs(documentService.findByQuery(query, user), user);
+            logger.info("Found documents: " + Arrays.toString(documentDTOS.toArray()));
+            return documentDTOS;
         }
-
+        logger.info("Got both tags and query: tags are " + Arrays.toString(tags) + " and query is " + query);
         var queryDocs = convertToDTOs(documentService.findByQuery(query, user), user);
         var tagDocs = convertToDTOs(documentService.findByTags(tags, user), user);
         logger.info("Found documents by tag: " + Arrays.toString(tagDocs.toArray()));
