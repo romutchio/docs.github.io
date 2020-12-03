@@ -77,7 +77,11 @@ export default class DocumentsPage extends React.Component {
                 {
                     this.props.createModalShown &&
                     <Modal onClose={this.props.onCreateModalClose}>
-                        <CreateModal password={this.props.password} onCreate={this.closeCreateModal}/>
+                        <CreateModal
+                            password={this.props.password}
+                            onCreate={this.closeCreateModal}
+                            enableChangeFile={true}
+                        />
                     </Modal>
                 }
             </>

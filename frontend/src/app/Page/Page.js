@@ -3,8 +3,6 @@ import './Page.css';
 
 import Footer from "../Footer/Footer";
 import FixedButtons from "../FixedButtons/FixedButtons";
-import Modal from "../Modal/Modal";
-import CreateModal from "../CreateModal/CreateModal";
 import DocumentsPage from "../DocumentsPage/DocumentsPage";
 
 export default class Page extends React.Component {
