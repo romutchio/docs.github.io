@@ -105,7 +105,7 @@ export default class DocumentsPage extends React.Component {
         const query = encodeURIComponent(this.searchQuery);
         const tags = this.chosenTags.map(t => encodeURIComponent(t)).join(",");
 
-        const uri = `/documents?query=${query}&tags=${tags}`;
+        const uri = `/documents/search?query=${query}&tags=${tags}`;
         console.log('uri', uri);
         const response = await fetch(uri);
 
