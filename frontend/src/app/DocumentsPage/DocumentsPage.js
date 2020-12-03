@@ -25,19 +25,21 @@ export default class DocumentsPage extends React.Component {
             editModalShown: false,
             deleteModalShown: false,
             currentDocument: {},
-            documents: []
+            documents: [],
+            tags: []
         }
     }
 
     async componentDidMount() {
         await this.updateDocuments();
+        await this.updateTags();
     }
 
     render() {
         return (
             <>
                 <Search onEdit={this.editSearch}/>
-                <Tags onTagClick={this.editChosenTags}/>
+                <Tags tags={this.state.tags} onTagClick={this.editChosenTags}/>
                 <Documents documents={this.state.documents} onChose={this.choseDocument}/>
                 {
                     this.state.documentModalShown &&
@@ -132,6 +134,20 @@ export default class DocumentsPage extends React.Component {
         this.setState({documents});
     }
 
+    updateTags = async () => {
+        const response = await fetch('/tags');
+
+        if (response.status !== 200) {
+            console.error(response.status, response.statusText);
+            return;
+        }
+
+        const tags = await response.json();
+        console.log('tags', tags);
+
+        this.setState({tags});
+    }
+
     editSearch = async query => {
         this.searchQuery = query;
         await this.updateDocuments();
@@ -172,6 +188,7 @@ export default class DocumentsPage extends React.Component {
     createDocument = async () => {
         this.closeEditModal();
         await this.updateDocuments();
+        await this.updateTags();
     }
 
     closeDocumentModal = () => {
