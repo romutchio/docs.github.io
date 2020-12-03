@@ -89,11 +89,26 @@ export default class DocumentsPage extends React.Component {
         let [, type, , encoded] = this.state.currentDocument.file.match(/data:(.*?);(.*?),(.*)/);
         type += ';charset=utf-8';
 
-        const decoded = CryptoJS.AES.decrypt(encoded, this.props.password).toString(CryptoJS.enc.Utf8);
-        const file = new File([decoded], `${name}.${MimeTypes.extension(type)}`, {type});
+        const decoded = CryptoJS.AES.decrypt(encoded, this.props.password);
+        const typedArray = this.convertWordArrayToUint8Array(decoded);
+        const file = new File([typedArray], `${name}.${MimeTypes.extension(type)}`, {type});
 
         FileSaver.saveAs(file);
         this.closeDocumentModal();
+    }
+
+    convertWordArrayToUint8Array = (wordArray) => {
+        var arrayOfWords = wordArray.hasOwnProperty("words") ? wordArray.words : [];
+        var length = wordArray.hasOwnProperty("sigBytes") ? wordArray.sigBytes : arrayOfWords.length * 4;
+        var uInt8Array = new Uint8Array(length), index=0, word, i;
+        for (i=0; i<length; i++) {
+            word = arrayOfWords[i];
+            uInt8Array[index++] = word >> 24;
+            uInt8Array[index++] = (word >> 16) & 0xff;
+            uInt8Array[index++] = (word >> 8) & 0xff;
+            uInt8Array[index++] = word & 0xff;
+        }
+        return uInt8Array;
     }
 
     getDocument = async document => {
