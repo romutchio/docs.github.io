@@ -1,7 +1,6 @@
 package com._742pm.docs.service;
 
 import com._742pm.docs.models.Document;
-import com._742pm.docs.models.Tag;
 import com._742pm.docs.models.User;
 import com._742pm.docs.repository.DocumentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,14 +41,8 @@ public class DocumentService implements IDocumentService
         var doc = repository.findById(documentId).orElse(null);
         if (doc != null)
         {
-            if (!document.getName().equals(doc.getName()))
-            {
-                doc.setName(document.getName());
-            }
-            if (!(document.getData().equals(doc.getData())))
-            {
-                doc.setData(doc.getData());
-            }
+            doc.setName(document.getName());
+            doc.setData(document.getData());
             repository.save(doc);
         }
     }

@@ -80,14 +80,14 @@ public class DocumentController
 
         var userId = user.getId();
 
-        var document = new Document(documentDTO.getId(), documentDTO.getName(), userId, documentDTO.getData());
-        var documentId = document.getId();
+        var documentId = documentDTO.getId();
         tagService.deleteDocumentTags(documentId);
         var tags = Arrays.stream(documentDTO.getTags()).parallel().map(tag ->
                 tagService.create(new Tag(tag, documentId, userId))
         ).toArray(UUID[]::new);
 
         logger.info("Created " + tags.length + " of tags for user " + user.getName() + " and document " + documentId + ": " + Arrays.toString(tags));
+        var document = new Document(documentDTO.getId(), documentDTO.getName(), userId, documentDTO.getData());
         documentService.update(documentId, document);
     }
 
