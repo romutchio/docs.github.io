@@ -74,14 +74,14 @@ export default class CreateModal extends React.Component {
     }
 
     getFile = async e => {
-        if (this.props.enableChangeFile) {
+        if (!this.props.enableChangeFile) {
             return;
         }
 
         const file = e.target?.files?.[0];
 
         if (file) {
-            this.setState({filename: file?.name});
+            this.setState({filename: file.name});
             await this.processFile(file);
         }
     }
